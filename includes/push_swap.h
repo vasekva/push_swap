@@ -7,6 +7,12 @@
 #include "../libft/includes/libft.h"
 #include "exception.h"
 
+typedef struct	t_number
+{
+	int	ind;
+	int	number;
+}				s_number;
+
 void	exception(char *str);
 
 

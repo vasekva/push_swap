@@ -2,19 +2,24 @@ NAME 				=	libft.a
 
 INCLUDES			=	-I ./includes/
 
+FIRST_DIR			=	./srcs/first_part/
+BONUS_DIR			=	./srcs/bonus_part/
 OBJS_DIR			=	./objs/
-SRCS_DIR			=	./srcs/
 
-SRCS_NAME			=	ft_strlen.c	ft_isdigit.c ft_atoi.c
+FIRST_PART			=	ft_strlen.c	ft_isdigit.c ft_atoi.c
 
-OBJS_NAME			=	$(SRCS_NAME:.c=.o)
+BONUS_PART	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+				ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
+				ft_lstmap.c \
 
-SRCS				=	$(addprefix $(SRCS_DIR), $(SRCS_NAME))
-OBJS				=	$(addprefix $(OBJS_DIR), $(OBJS_NAME))
+OBJS_NAME		=	$(FIRST_PART:.c=.o) $(BONUS_PART:.c=.o)
 
-CC					=	gcc
+SRCS			=	$(addprefix $(FIRST_DIR),	$(FIRST_PART))	$(addprefix $(BONUS_DIR), $(BONUS_PART))
+OBJS			=	$(addprefix $(OBJS_DIR),	$(FIRST_PART:.c=.o))	$(addprefix $(OBJS_DIR), $(BONUS_PART:.c=.o))
 
-CFLAGS				=	-Wall -Wextra -Werror
+CC				=	gcc
+
+CFLAGS			=	-Wall -Wextra -Werror
 
 all:					$(NAME)
 
@@ -27,7 +32,8 @@ $(NAME):				$(OBJS)
 $(OBJS):				$(SRCS)
 						@($(CC)		$(INCLUDES) -c	$(SRCS))
 						@(mkdir 	-p 				$(OBJS_DIR))
-						@(mv 		$(OBJS_NAME)	$(OBJS_DIR))
+						@mv $(OBJS_NAME) $(OBJS_DIR)
+						@#mv $(BONUS_PART:.c=.o) $(OBJS_DIR)
 
 clean:
 						@(rm -rf	$(OBJS))

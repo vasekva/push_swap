@@ -12,6 +12,8 @@ int	is_int_num(char *str)
 	{
 		if (i == 0 && str[i] == '-')
 			continue ;
+		if (str[i] == ' ')
+			continue;
 		if (!ft_isdigit(str[i]))
 		{
 			exception(NOTDIGIT);
@@ -31,7 +33,9 @@ int	parse_parameters(int argc, char **argv)
 	i = 0;
 	// проверка валидности чисел в массиве
 	while (argv[++i])
+	{
 		is_int_num(argv[i]);
+	}
 	i = 0;
 	// проверка повторяющихся чисел
 	while (argv[++i])

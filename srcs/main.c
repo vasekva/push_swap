@@ -28,8 +28,7 @@ int	parse_parameters(int argc, char **argv)
 	int	i;
 	int	j;
 
-	i = 1;
-//	j = 1;
+	i = 0;
 	// проверка валидности чисел в массиве
 	while (argv[++i])
 		is_int_num(argv[i]);

@@ -5,7 +5,7 @@ INCLUDES			=	-I ./includes/
 OBJS_DIR			=	./objs/
 SRCS_DIR			=	./srcs/
 
-SRCS_NAME			=	ft_strlen.c
+SRCS_NAME			=	ft_strlen.c	ft_isdigit.c ft_atoi.c
 
 OBJS_NAME			=	$(SRCS_NAME:.c=.o)
 

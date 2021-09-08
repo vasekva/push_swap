@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jberegon <jberegon@student.21-schoo>       +#+  +:+       +#+        */
+/*   By: jberegon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/02 07:18:14 by jberegon          #+#    #+#             */
-/*   Updated: 2021/09/02 07:18:15 by jberegon         ###   ########.fr       */
+/*   Created: 2020/11/03 12:55:42 by jberegon          #+#    #+#             */
+/*   Updated: 2020/11/04 20:59:48 by jberegon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
-
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-size_t	ft_strlen(const char *s);
-int		ft_isdigit(int c);
-long long		ft_atoi(const char *str);
-
-#endif
+int		ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+	{
+		return (1);
+	}
+	return (0);
+}

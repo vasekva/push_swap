@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   exceptions.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberegon <jberegon@student.21-schoo>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/02 07:18:14 by jberegon          #+#    #+#             */
-/*   Updated: 2021/09/02 07:18:15 by jberegon         ###   ########.fr       */
+/*   Created: 2021/09/02 07:20:46 by jberegon          #+#    #+#             */
+/*   Updated: 2021/09/02 07:20:47 by jberegon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef EXCEPTIONS_H
+# define EXCEPTIONS_H
 
-# include <string.h>
-# include <unistd.h>
-# include <stdlib.h>
-
-size_t	ft_strlen(const char *s);
-int		ft_isdigit(int c);
-long long		ft_atoi(const char *str);
-
+# define FEWPARAMS	"You specified too few parameters!"
+# define NOTDIGIT	"You specified not digit argument!"
+# define OVERFLOW	"You specified invalid number!"
 #endif

@@ -26,13 +26,25 @@ int	is_int_num(char *str)
 int	parse_parameters(int argc, char **argv)
 {
 	int	i;
+	int	j;
 
 	i = 1;
+//	j = 1;
 	// проверка валидности чисел в массиве
-	while (argv[i])
-	{
+	while (argv[++i])
 		is_int_num(argv[i]);
-		i++;
+	i = 0;
+	// проверка повторяющихся чисел
+	while (argv[++i])
+	{
+		j = 0;
+		while (argv[++j])
+		{
+			if (j == i)
+				continue;
+			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+				exception(REPEATING);
+		}
 	}
 }
 

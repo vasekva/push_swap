@@ -16,4 +16,6 @@
 # define FEWPARAMS	"You specified too few parameters!"
 # define NOTDIGIT	"You specified not digit argument!"
 # define OVERFLOW	"You specified invalid number!"
+# define REPEATING	"You specified repeating numbers!"
+
 #endif

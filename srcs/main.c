@@ -28,7 +28,6 @@ int	is_int_num(char *str)
 int	parse_parameters(int argc, char **argv, t_list *list)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	// проверка валидности чисел в массиве
@@ -41,19 +40,6 @@ int	parse_parameters(int argc, char **argv, t_list *list)
 				list = ft_lstnew(&i);
 			else
 				list->next = ft_lstnew(&i);
-		}
-	}
-	i = 0;
-	// проверка повторяющихся чисел
-	while (argv[++i])
-	{
-		j = 0;
-		while (argv[++j])
-		{
-			if (j == i)
-				continue;
-			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-				exception(REPEATING);
 		}
 	}
 }
@@ -82,6 +68,31 @@ void	printLinkedList(const t_list *list)
 	printf("\n");
 }
 
+void	checkLinkedList(const t_list *list)
+{
+	t_list	*p;
+	t_list	*p_iter;
+
+	p = list;
+	p_iter = list;
+	while (list)
+	{
+		while (p_iter)
+		{
+			if (list == p_iter)
+				p_iter = p_iter->next;
+			else
+			{
+				if (list->value == p_iter->value)
+					exception(REPEATING);
+				p_iter = p_iter->next;
+			}
+		}
+		p_iter = p; // обнуление указателя
+		list = list->next;
+	}
+}
+
 void	pushBack(t_list **list, int value)
 {
 	t_list *last;
@@ -102,7 +113,7 @@ void	pushBack(t_list **list, int value)
 	}
 }
 
-int	has_spaces(char *str)
+int	has_spaces(const char *str)
 {
 	int i;
 
@@ -115,7 +126,7 @@ int	has_spaces(char *str)
 	return (0);
 }
 
-int	fill_list(char **argv, t_list **list)
+void	fill_list(char **argv, t_list **list)
 {
 	char **arr;
 	int	i;
@@ -148,6 +159,7 @@ int main(int argc, char **argv)
 	{
 		parse_parameters(argc, argv, &list);
 		fill_list(argv, &list);
+		checkLinkedList(list);
 		printLinkedList(list);
 		printf("Hello, World!\n");
 	}

@@ -19,7 +19,7 @@
 
 typedef struct		s_list
 {
-	void			*content;
+	int				value;
 	struct s_list	*next;
 }					t_list;
 
@@ -31,9 +31,15 @@ int				ft_isdigit(int c);
 long long		ft_atoi(const char *str);
 
 /*
+ * SECOND_PART
+ */
+char			**ft_split(char const *s, char c);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+
+/*
  * BONUSES
  */
-t_list			*ft_lstnew(void *content);
+t_list			*ft_lstnew(void *value);
 void			ft_lstadd_front(t_list **lst, t_list *new_list);
 int				ft_lstsize(t_list *lst);
 t_list			*ft_lstlast(t_list *lst);

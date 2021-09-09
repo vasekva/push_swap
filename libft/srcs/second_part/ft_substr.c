@@ -1,24 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberegon <jberegon@student.21-schoo>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/12 07:07:02 by jberegon          #+#    #+#             */
-/*   Updated: 2020/11/12 09:28:37 by jberegon         ###   ########.fr       */
+/*   Created: 2020/11/07 07:03:00 by jberegon          #+#    #+#             */
+/*   Updated: 2020/11/08 19:42:27 by jberegon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *value)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	t_list *list;
+	size_t	i;
+	size_t	j;
+	char	*str;
 
-	if (!(list = (t_list *)malloc(sizeof(t_list))))
+	if (s == NULL)
 		return (NULL);
-	list->value = value;
-	list->next = NULL;
-	return (list);
+	str = (char*)malloc(sizeof(*s) * (len + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s[i] != '\0')
+	{
+		if (i >= start && j < len)
+		{
+			str[j] = s[i];
+			j++;
+		}
+		i++;
+	}
+	str[j] = 0;
+	return (str);
 }

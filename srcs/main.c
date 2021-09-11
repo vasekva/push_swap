@@ -49,9 +49,10 @@ t_stack	*getLast(t_stack *stack)
 	return (stack);
 }
 
-void	printLinkedList(const t_stack *stack)
+void	printLinkedList(const t_stack *stack, int n)
 {
-	while (stack)
+	int i = -1;
+	while (stack && ++i < n)
 	{
 		if (stack->next != NULL)
 			printf("%d ", stack->value);
@@ -60,6 +61,19 @@ void	printLinkedList(const t_stack *stack)
 		stack = stack->next;
 	}
 	printf("\n");
+}
+
+int	listLength(const t_stack *stack)
+{
+	int length;
+
+	length = 0;
+	while (stack)
+	{
+		stack = stack->next;
+		length++;
+	}
+	return (length);
 }
 
 void	checkLinkedList(const t_stack *stack)
@@ -147,14 +161,23 @@ void	fill_list(char **argv, t_stack **stack)
 int main(int argc, char **argv)
 {
 	t_stack *stack;
+	t_stack	*two;
 
 	stack = NULL;
+	pushBack(&two, 3);
 	if (argc >= 2)
 	{
 		parse_parameters(argv);
 		fill_list(argv, &stack);
 		checkLinkedList(stack);
-		printLinkedList(stack);
+		printLinkedList(stack, listLength(stack));
+		swap(&stack);
+		swap(&two);
+		printLinkedList(stack, listLength(stack));
+		printLinkedList(two, listLength(two));
+		push(&two, &stack);
+		printLinkedList(stack, listLength(stack));
+		printLinkedList(two, listLength(two));
 		printf("Hello, World!\n");
 	}
 	else

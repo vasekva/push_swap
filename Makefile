@@ -6,7 +6,7 @@ LIBRARY			=	./libft/libft.a
 SRCS_DIR		=	./srcs/
 OBJS_DIR		=	./objs/
 
-SRCS_NAME		=	main.c exception.c
+SRCS_NAME		=	main.c exception.c	actions.c
 
 OBJS_NAME	=	$(SRCS_NAME:.c=.o)
 

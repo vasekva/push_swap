@@ -17,5 +17,6 @@
 # define NOTDIGIT	"You specified not digit argument!"
 # define OVERFLOW	"You specified invalid number!"
 # define REPEATING	"You specified repeating numbers!"
+# define EMPTYSTACK	"Stack is empty!"
 
 #endif

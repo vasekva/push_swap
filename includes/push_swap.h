@@ -15,5 +15,8 @@ typedef struct		s_list
 
 void	exception(char *str);
 
+void	swap(t_stack **stack_a);
+void	push(t_stack **src, t_stack **dst);
+
 
 #endif

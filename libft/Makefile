@@ -11,15 +11,10 @@ FIRST_PART			=	ft_strlen.c	ft_isdigit.c ft_atoi.c
 
 SECOND_PART			=	ft_split.c ft_substr.c
 
-BONUS_PART	=	ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-				ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c \
-				ft_lstmap.c \
+OBJS_NAME		=	$(FIRST_PART:.c=.o) $(SECOND_PART:.c=.o)
 
-OBJS_NAME		=	$(FIRST_PART:.c=.o) $(SECOND_PART:.c=.o) $(BONUS_PART:.c=.o)
-
-SRCS			=	$(addprefix $(FIRST_DIR),	$(FIRST_PART))	$(addprefix $(SECOND_DIR), $(SECOND_PART)) $(addprefix $(BONUS_DIR), $(BONUS_PART))
-OBJS			=	$(addprefix $(OBJS_DIR),	$(FIRST_PART:.c=.o))	$(addprefix $(OBJS_DIR), $(SECOND_PART:.c=.o)) $(addprefix $(OBJS_DIR), $(BONUS_PART:.c=.o))
-
+SRCS			=	$(addprefix $(FIRST_DIR),	$(FIRST_PART))	$(addprefix $(SECOND_DIR), $(SECOND_PART))
+OBJS			=	$(addprefix $(OBJS_DIR),	$(FIRST_PART:.c=.o))	$(addprefix $(OBJS_DIR), $(SECOND_PART:.c=.o))
 CC				=	gcc
 
 CFLAGS			=	-Wall -Wextra -Werror

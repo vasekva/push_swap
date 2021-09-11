@@ -25,7 +25,7 @@ int	is_int_num(char *str)
 	return ((int)number);
 }
 
-int	parse_parameters(int argc, char **argv, t_list *list)
+int	parse_parameters(char **argv)
 {
 	int	i;
 
@@ -34,14 +34,8 @@ int	parse_parameters(int argc, char **argv, t_list *list)
 	while (argv[++i])
 	{
 		is_int_num(argv[i]);
-		if (argc > 2)
-		{
-			if (i == 1)
-				list = ft_lstnew(&i);
-			else
-				list->next = ft_lstnew(&i);
-		}
 	}
+	return (0);
 }
 
 t_list	*getLast(t_list *list)
@@ -70,8 +64,8 @@ void	printLinkedList(const t_list *list)
 
 void	checkLinkedList(const t_list *list)
 {
-	t_list	*p;
-	t_list	*p_iter;
+	const t_list	*p;
+	const t_list	*p_iter;
 
 	p = list;
 	p_iter = list;
@@ -157,7 +151,7 @@ int main(int argc, char **argv)
 	list = NULL;
 	if (argc >= 2)
 	{
-		parse_parameters(argc, argv, &list);
+		parse_parameters(argv);
 		fill_list(argv, &list);
 		checkLinkedList(list);
 		printLinkedList(list);

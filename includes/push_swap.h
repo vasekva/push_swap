@@ -7,11 +7,11 @@
 #include "../libft/includes/libft.h"
 #include "exception.h"
 
-typedef struct	t_number
+typedef struct		s_list
 {
-	int	ind;
-	int	number;
-}				s_number;
+	int				value;
+	struct s_list	*next;
+}					t_stack;
 
 void	exception(char *str);
 

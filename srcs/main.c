@@ -165,19 +165,30 @@ int main(int argc, char **argv)
 
 	stack = NULL;
 	pushBack(&two, 3);
+	pushBack(&two, 9);
 	if (argc >= 2)
 	{
 		parse_parameters(argv);
 		fill_list(argv, &stack);
 		checkLinkedList(stack);
+
 		printLinkedList(stack, listLength(stack));
-		swap(&stack);
-		swap(&two);
-		printLinkedList(stack, listLength(stack));
-		printLinkedList(two, listLength(two));
+
+		//swap(&stack);
+		//swap(&two);
+		//printLinkedList(stack, listLength(stack));
+		//printLinkedList(two, listLength(two));
+
 		push(&two, &stack);
 		printLinkedList(stack, listLength(stack));
 		printLinkedList(two, listLength(two));
+
+		//rotate(&stack);
+		//printLinkedList(stack, listLength(stack));
+
+		//reverse_rotate(&stack);
+		//reverse_rotate(&stack);
+		//printLinkedList(stack, listLength(stack));
 		printf("Hello, World!\n");
 	}
 	else

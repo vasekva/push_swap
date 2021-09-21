@@ -7,9 +7,17 @@ SECOND_DIR			=	./srcs/second_part/
 BONUS_DIR			=	./srcs/bonus_part/
 OBJS_DIR			=	./objs/
 
-FIRST_PART			=	ft_strlen.c	ft_isdigit.c ft_atoi.c
+FIRST_PART			=	ft_atoi.c \
+						ft_isdigit.c \
+						ft_memcpy.c \
+						ft_strchr.c \
+						ft_strdup.c \
+						ft_strlen.c	\
+						ft_strncmp.c \
 
-SECOND_PART			=	ft_split.c ft_substr.c
+SECOND_PART			=	ft_split.c \
+						ft_strjoin.c \
+						ft_substr.c \
 
 OBJS_NAME		=	$(FIRST_PART:.c=.o) $(SECOND_PART:.c=.o)
 

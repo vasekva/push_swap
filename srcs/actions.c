@@ -4,9 +4,7 @@ void	push(t_stack **src, t_stack **dst)
 {
 	t_stack *tmp;
 
-	if (!(*src) || !(*dst))
-		exception(EMPTYSTACK);
-	if (!(*src)->next)
+	if (!(*src))
 		return ;
 	tmp = (*src)->next;
 	(*src)->next = *dst;
@@ -18,9 +16,7 @@ void	swap(t_stack **stack)
 {
 	t_stack *tmp;
 
-	if (!(*stack))
-		exception(EMPTYSTACK);
-	if (!(*stack)->next || !(*stack)->next->next)
+	if (!(*stack) || !(*stack)->next)
 		return ;
 	tmp = (*stack)->next;
 	(*stack)->next = tmp->next;
@@ -32,9 +28,7 @@ void	rotate(t_stack **stack)
 {
 	t_stack *tmp;
 
-	if (!(*stack))
-		exception(EMPTYSTACK);
-	if (!(*stack)->next)
+	if (!(*stack) || !(*stack)->next)
 		return ;
 	tmp = (*stack);
 	while (tmp->next)
@@ -49,9 +43,7 @@ void reverse_rotate(t_stack **stack)
 	t_stack *pre_last;
 	t_stack *last;
 
-	if (!(*stack))
-		exception(EMPTYSTACK);
-	if (!(*stack)->next)
+	if (!(*stack) || !(*stack)->next)
 		return ;
 	pre_last = (*stack);
 	while (pre_last->next->next)

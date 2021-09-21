@@ -158,30 +158,102 @@ void	fill_list(char **argv, t_stack **stack)
 	}
 }
 
+void do_actions(t_stack *a, t_stack *b)
+{
+	char *action;
+
+	action = NULL;
+	while (1)
+	{
+		get_next_line(1, &action);
+		if (!ft_strncmp("pa", action, ft_strlen(action)))
+		{
+			printf("%s\n", "pushA");
+			push(&b, &a);
+		}
+		if (!ft_strncmp("pb", action, ft_strlen(action)))
+		{
+			printf("%s\n", "pushB");
+			push(&a, &b);
+		}
+		if (!ft_strncmp("sa", action, ft_strlen(action)))
+		{
+			printf("%s\n", "swapA");
+			swap(&a);
+		}
+		if (!ft_strncmp("sb", action, ft_strlen(action)))
+		{
+			printf("%s\n", "swapB");
+			swap(&b);
+		}
+		if (!ft_strncmp("ss", action, ft_strlen(action)))
+		{
+			printf("%s\n", "swapA && swapB");
+			swap(&a);
+			swap(&b);
+		}
+		if (!ft_strncmp("ra", action, ft_strlen(action)))
+		{
+			printf("%s\n", "rotateA");
+			rotate(&a);
+		}
+		if (!ft_strncmp("rb", action, ft_strlen(action)))
+		{
+			printf("%s\n", "rotateB");
+			rotate(&b);
+		}
+		if (!ft_strncmp("rr", action, ft_strlen(action)))
+		{
+			printf("%s\n", "rotateA && rotateB");
+			rotate(&a);
+			rotate(&b);
+		}
+		if (!ft_strncmp("rra", action, ft_strlen(action)))
+		{
+			printf("%s\n", "reverse_rotateA");
+			reverse_rotate(&a);
+		}
+		if (!ft_strncmp("rrb", action, ft_strlen(action)))
+		{
+			printf("%s\n", "reverse_rotateB");
+			reverse_rotate(&b);
+		}
+		if (!ft_strncmp("rrr", action, ft_strlen(action)))
+		{
+			printf("%s\n", "reverse_rotateA && reverse_rotateB");
+			reverse_rotate(&a);
+			reverse_rotate(&b);
+		}
+		printf("A: ");
+		printLinkedList(a, listLength(a));
+		printf("B: ");
+		printLinkedList(b, listLength(b));
+	}
+}
+
 int main(int argc, char **argv)
 {
 	t_stack *stack;
 	t_stack	*two;
 
 	stack = NULL;
-	pushBack(&two, 3);
-	pushBack(&two, 9);
+	two = NULL;
 	if (argc >= 2)
 	{
 		parse_parameters(argv);
 		fill_list(argv, &stack);
 		checkLinkedList(stack);
-
 		printLinkedList(stack, listLength(stack));
+		do_actions(stack, two);
 
 		//swap(&stack);
 		//swap(&two);
 		//printLinkedList(stack, listLength(stack));
 		//printLinkedList(two, listLength(two));
 
-		push(&two, &stack);
-		printLinkedList(stack, listLength(stack));
-		printLinkedList(two, listLength(two));
+		//push(&two, &stack);
+		//printLinkedList(stack, listLength(stack));
+		//printLinkedList(two, listLength(two));
 
 		//rotate(&stack);
 		//printLinkedList(stack, listLength(stack));

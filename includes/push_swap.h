@@ -14,6 +14,7 @@
 typedef struct		s_list
 {
 	int				value;
+	int             ind;
 	struct s_list	*next;
 }					t_stack;
 
@@ -29,6 +30,8 @@ int	    listLength(const t_stack *stack);
 t_stack *getLast(t_stack *stack);
 void	pushBack(t_stack **stack, int value);
 
+
+void little_sort(t_stack *a, t_stack *b);
 
 
 void	swap(t_stack **stack_a);

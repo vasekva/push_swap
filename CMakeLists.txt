@@ -26,6 +26,7 @@ add_executable(push_swap
         srcs/actions.c
         srcs/exception.c
         srcs/get_next_line.c
+        srcs/little_sort.c
         srcs/main.c
 
         )

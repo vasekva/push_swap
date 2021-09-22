@@ -158,6 +158,34 @@ void do_actions(t_stack *a, t_stack *b)
 	}
 }
 
+void    put_indexes(t_stack *stack)
+{
+    int mid_pos;
+    int len;
+    int ind;
+    int i;
+
+    i = 0;
+    ind = 0;
+    len = listLength(stack);
+    mid_pos = (len / 2);
+    if (len % 2 != 0)
+        ++mid_pos;
+    while (stack)
+    {
+        if (i < mid_pos)
+            stack->ind = (ind++) + 1;
+        else
+        {
+            if (!(len % 2 == 0 && i == mid_pos))
+                ind--;
+            stack->ind = (ind) * -1;
+        }
+        i++;
+        stack = stack->next;
+    }
+}
+
 int main(int argc, char **argv)
 {
 	t_stack *stack_a;
@@ -171,14 +199,16 @@ int main(int argc, char **argv)
             return (0);
 		parse_parameters(argv);
 		fill_list(argv, &stack_a);
+		put_indexes(stack_a);
 		checkLinkedList(stack_a);
 		printLinkedList(stack_a, listLength(stack_a));
-/*
-		if (argc < 4)
+
+		if (argc <= 4)
         {
 		    little_sort(stack_a, stack_b);
-        }*/
-		do_actions(stack_a, stack_b);
+        }
+		else
+		    do_actions(stack_a, stack_b);
 
 	}
 	else

@@ -25,6 +25,6 @@ void	swap(t_stack **stack_a);
 void	push(t_stack **src, t_stack **dst);
 void	rotate(t_stack **stack);
 void	reverse_rotate(t_stack **stack);
-
+void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b);
 
 #endif

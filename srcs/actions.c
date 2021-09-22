@@ -1,5 +1,27 @@
 #include "push_swap.h"
 
+void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b)
+{
+    if (!ft_strncmp("ss", cmd, ft_strlen(cmd)))
+    {
+        printf("%s\n", "swapA && swapB");
+        swap(a);
+        swap(b);
+    }
+    else if (!ft_strncmp("rr", cmd, ft_strlen(cmd)))
+    {
+        printf("%s\n", "rotateA && rotateB");
+        rotate(a);
+        rotate(b);
+    }
+    else if (!ft_strncmp("rrr", cmd, ft_strlen(cmd)))
+    {
+        printf("%s\n", "reverse_rotateA && reverse_rotateB");
+        reverse_rotate(a);
+        reverse_rotate(b);
+    }
+}
+
 void	push(t_stack **src, t_stack **dst)
 {
 	t_stack *tmp;

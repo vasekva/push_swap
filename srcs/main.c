@@ -38,44 +38,6 @@ int	parse_parameters(char **argv)
 	return (0);
 }
 
-t_stack	*getLast(t_stack *stack)
-{
-	if (stack == NULL)
-		return (NULL);
-	while (stack->next)
-	{
-		stack = stack->next;
-	}
-	return (stack);
-}
-
-void	printLinkedList(const t_stack *stack, int n)
-{
-	int i = -1;
-	while (stack && ++i < n)
-	{
-		if (stack->next != NULL)
-			printf("%d ", stack->value);
-		else
-			printf("%d", stack->value);
-		stack = stack->next;
-	}
-	printf("\n");
-}
-
-int	listLength(const t_stack *stack)
-{
-	int length;
-
-	length = 0;
-	while (stack)
-	{
-		stack = stack->next;
-		length++;
-	}
-	return (length);
-}
-
 void	checkLinkedList(const t_stack *stack)
 {
 	const t_stack	*p;
@@ -98,26 +60,6 @@ void	checkLinkedList(const t_stack *stack)
 		}
 		p_iter = p; // обнуление указателя
 		stack = stack->next;
-	}
-}
-
-void	pushBack(t_stack **stack, int value)
-{
-	t_stack *last;
-	t_stack *tmp;
-
-	if (!(last = getLast(*stack)))
-	{
-		(*stack) = (t_stack *)malloc(sizeof(t_stack));
-		(*stack)->value = value;
-		(*stack)->next = NULL;
-	}
-	else
-	{
-		tmp = (t_stack *)malloc(sizeof(t_stack));
-		tmp->value = value;
-		tmp->next = NULL;
-		last->next = tmp;
 	}
 }
 
@@ -218,22 +160,28 @@ void do_actions(t_stack *a, t_stack *b)
 
 int main(int argc, char **argv)
 {
-	t_stack *stack;
-	t_stack	*two;
+	t_stack *stack_a;
+	t_stack	*stack_b;
 
-	stack = NULL;
-	two = NULL;
+    stack_a = NULL;
+    stack_b = NULL;
 	if (argc >= 2)
 	{
+	    if (argc == 2)
+            return (0);
 		parse_parameters(argv);
-		fill_list(argv, &stack);
-		checkLinkedList(stack);
-		printLinkedList(stack, listLength(stack));
-
-		do_actions(stack, two);
+		fill_list(argv, &stack_a);
+		checkLinkedList(stack_a);
+		printLinkedList(stack_a, listLength(stack_a));
+/*
+		if (argc < 4)
+        {
+		    little_sort(stack_a, stack_b);
+        }*/
+		do_actions(stack_a, stack_b);
 
 	}
 	else
 		exception(FEWPARAMS);
-	return 0;
+	return (0);
 }

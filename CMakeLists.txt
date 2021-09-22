@@ -13,11 +13,19 @@ add_executable(push_swap
         libft/srcs/first_part/ft_strdup.c
         libft/srcs/first_part/ft_strlen.c
         libft/srcs/first_part/ft_strncmp.c
+
         libft/srcs/second_part/ft_split.c
         libft/srcs/second_part/ft_strjoin.c
         libft/srcs/second_part/ft_substr.c
+
+        srcs/lists/getLast.c
+        srcs/lists/listLength.c
+        srcs/lists/printLinkedList.c
+        srcs/lists/pushBack.c
+
         srcs/actions.c
         srcs/exception.c
         srcs/get_next_line.c
         srcs/main.c
+
         )

@@ -208,6 +208,10 @@ int main(int argc, char **argv)
         {
 		    little_sort(&stack_a);
         }
+		else if (argc >= 5 && argc <= 6)
+		{
+			sort_five_and_four_nums(&stack_a, &stack_b);
+		}
 		else
 		    do_actions(stack_a, stack_b);
 		//swap(&stack_a, "a");

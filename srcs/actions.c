@@ -32,6 +32,8 @@ void	push(t_stack **src, t_stack **dst, char *name)
 	(*src)->next = *dst;
 	*dst = (*src);
 	*src = tmp;
+	put_indexes(*src);
+	put_indexes(*dst);
 	if (name)
     {
 	    printf("%s\n", ft_strjoin("p", name));
@@ -48,7 +50,8 @@ void	swap(t_stack **stack, char *name)
 	(*stack)->next = tmp->next;
 	tmp->next = (*stack);
 	(*stack) = tmp;
-    if (name)
+	put_indexes(*stack);
+	if (name)
     {
         printf("%s\n", ft_strjoin("s", name));
     }
@@ -66,7 +69,8 @@ void	rotate(t_stack **stack, char *name)
 	tmp->next = (*stack);
 	(*stack) = (*stack)->next;
 	tmp->next->next = NULL;
-    if (name)
+	put_indexes(*stack);
+	if (name)
     {
         printf("%s\n", ft_strjoin("r", name));
     }
@@ -86,7 +90,8 @@ void reverse_rotate(t_stack **stack, char *name)
 	pre_last->next = NULL;
 	last->next = (*stack);
 	(*stack) = last;
-    if (name)
+	put_indexes(*stack);
+	if (name)
     {
         printf("%s\n", ft_strjoin("rr", name));
     }

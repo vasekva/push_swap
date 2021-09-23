@@ -111,42 +111,42 @@ void do_actions(t_stack *a, t_stack *b)
 		if (!ft_strncmp("pa", action, ft_strlen(action)))
 		{
 			printf("%s\n", "pushA");
-			push(&b, &a);
+			push(&b, &a, "a");
 		}
 		else if (!ft_strncmp("pb", action, ft_strlen(action)))
 		{
 			printf("%s\n", "pushB");
-			push(&a, &b);
+			push(&a, &b, "b");
 		}
         else if (!ft_strncmp("sa", action, ft_strlen(action)))
 		{
 			printf("%s\n", "swapA");
-			swap(&a);
+			swap(&a, "a");
 		}
         else if (!ft_strncmp("sb", action, ft_strlen(action)))
 		{
 			printf("%s\n", "swapB");
-			swap(&b);
+			swap(&b, "b");
 		}
         else if (!ft_strncmp("ra", action, ft_strlen(action)))
 		{
 			printf("%s\n", "rotateA");
-			rotate(&a);
+			rotate(&a, "a");
 		}
         else if (!ft_strncmp("rb", action, ft_strlen(action)))
 		{
 			printf("%s\n", "rotateB");
-			rotate(&b);
+			rotate(&b, "b");
 		}
         else if (!ft_strncmp("rra", action, ft_strlen(action)))
 		{
 			printf("%s\n", "reverse_rotateA");
-			reverse_rotate(&a);
+			reverse_rotate(&a, "a");
 		}
         else if (!ft_strncmp("rrb", action, ft_strlen(action)))
 		{
 			printf("%s\n", "reverse_rotateB");
-			reverse_rotate(&b);
+			reverse_rotate(&b, "b");
 		}
         else
             execute_two_cmds(action, &a, &b);
@@ -186,6 +186,7 @@ void    put_indexes(t_stack *stack)
     }
 }
 
+//TODO: посмотреть работу strjoin с неаллоцированными строками
 int main(int argc, char **argv)
 {
 	t_stack *stack_a;
@@ -205,12 +206,13 @@ int main(int argc, char **argv)
 
 		if (argc <= 4)
         {
-		    little_sort(stack_a, stack_b);
+		    little_sort(&stack_a);
         }
 		else
 		    do_actions(stack_a, stack_b);
-
-	}
+		//swap(&stack_a, "a");
+        printLinkedList(stack_a, listLength(stack_a));
+    }
 	else
 		exception(FEWPARAMS);
 	return (0);

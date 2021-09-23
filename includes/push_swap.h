@@ -21,7 +21,6 @@ typedef struct		s_list
 void	exception(char *str);
 int		get_next_line(int fd, char **line);
 
-
 /*
  * FUNCTIONS FOR LISTS
  */
@@ -29,15 +28,16 @@ void	printLinkedList(const t_stack *stack, int n);
 int	    listLength(const t_stack *stack);
 t_stack *getLast(t_stack *stack);
 void	pushBack(t_stack **stack, int value);
+void    put_indexes(t_stack *stack);
+
+void	little_sort(t_stack **stack);
+void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *stack_name);
 
 
-void little_sort(t_stack *a, t_stack *b);
-
-
-void	swap(t_stack **stack_a);
-void	push(t_stack **src, t_stack **dst);
-void	rotate(t_stack **stack);
-void	reverse_rotate(t_stack **stack);
+void	swap(t_stack **stack_a, char *name);
+void	push(t_stack **src, t_stack **dst, char *name);
+void	rotate(t_stack **stack, char *name);
+void	reverse_rotate(t_stack **stack, char *name);
 void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b);
 
 #endif

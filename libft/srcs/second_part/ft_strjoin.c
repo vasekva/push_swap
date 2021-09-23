@@ -20,6 +20,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (*s2)
 		res[i++] = (char)*s2++;
 	res[i] = '\0';
-	free(tmp);
+	//free(tmp);
 	return (res);
 }

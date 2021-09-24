@@ -174,7 +174,7 @@ void    put_indexes(t_stack *stack)
     while (stack)
     {
         if (i < mid_pos)
-            stack->ind = (ind++) + 1;
+            stack->ind = (ind++);
         else
         {
             if (!(len % 2 == 0 && i == mid_pos))

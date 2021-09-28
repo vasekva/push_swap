@@ -1,5 +1,9 @@
 # include "push_swap.h"
 
+/**
+ * Функция возвращает
+ * длину полученного списка.
+ */
 int	listLength(const t_stack *stack)
 {
     int length;

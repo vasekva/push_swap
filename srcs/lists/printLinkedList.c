@@ -1,9 +1,13 @@
 #include "push_swap.h"
 
-void	printLinkedList(const t_stack *stack, int len)
+/**
+ * Функция выводит значения
+ * полученного списка сверху вниз
+ * (слева направо).
+ */
+void	printLinkedList(const t_stack *stack)
 {
-    int i = -1;
-    while (stack && ++i < len)
+    while (stack)
     {
         if (stack->next != NULL)
 			//printf("%d ", stack->value);

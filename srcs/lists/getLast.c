@@ -1,15 +1,13 @@
 #include "push_swap.h"
 
 /**
- * Function returns a pointer to the last
- * element of a list.
- *
- * @param stack: List whose pointer is returned.
+ * Функция возвращает указатель на
+ * последний элемент списка.
  *
  * @return
- * Returns a pointer to the last
- * element of the passed list.\n
- * If stack equals NULL - returns NULL
+ * Возвращает указатель на последний
+ * элемент списка.\n
+ * Если список равен NULL - возвращается NULL.
  */
 t_stack	*getLast(t_stack *stack)
 {

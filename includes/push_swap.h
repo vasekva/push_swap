@@ -29,6 +29,8 @@ int	    listLength(const t_stack *stack);
 t_stack *getLast(t_stack *stack);
 void	pushBack(t_stack **stack, int value);
 void    put_indexes(t_stack *stack);
+int	find_max_value(t_stack *stack);
+int	find_min_value(t_stack *stack);
 
 void	little_sort(t_stack **stack);
 void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *stack_name);

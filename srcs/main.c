@@ -210,26 +210,12 @@ int main(int argc, char **argv)
         }
 		else if (argc >= 5 && argc <= 6)
 		{
-			int max = find_max_value(stack_a);
-			int min	= find_min_value(stack_a);
-			printf("%d\n", max);
-			printf("%d\n", min);
-			int nums = max - min + 1;
-			printf("Number of values between them: %d\n", nums);
-			int rangeSize = nums / 5;
-			printf("Range of values in each group: %d\n", rangeSize);
-
-			int i = 0;
-			while (++i <= 5)
-			{
-				int range = rangeSize * i;
-				int	minRangeValue = rangeSize * i - rangeSize;
-				int	maxRangeValue = range - 1;
-				printf("Range #%d: %d - %d;\n", i, minRangeValue, maxRangeValue);
-			}
 			sort_five_and_four_nums(&stack_a, &stack_b);
 		}
 		else
+		{
+			sort_one_hundred_nums(&stack_a, &stack_b);
+		}
 		    do_actions(stack_a, stack_b);
 		//swap(&stack_a, "a");
         printLinkedList(stack_a, listLength(stack_a));

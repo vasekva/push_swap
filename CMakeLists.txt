@@ -31,6 +31,7 @@ add_executable(push_swap
         srcs/little_sort.c
         srcs/main.c
         srcs/sort_five_and_four_nums.c
+        srcs/sort_one_hundred_nums.c
         srcs/utils.c
 
         )

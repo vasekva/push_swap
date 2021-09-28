@@ -36,7 +36,8 @@ void	little_sort(t_stack **stack);
 void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *stack_name);
 
 
-void	sort_five_and_four_nums(t_stack **a, t_stack **b);
+void	sort_five_and_four_nums(t_stack **stack_a, t_stack **stack_b);
+void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b);
 
 
 void	swap(t_stack **stack_a, char *name);

@@ -10,12 +10,14 @@ void	pushBack(t_stack **stack, int value)
         (*stack) = (t_stack *)malloc(sizeof(t_stack));
         (*stack)->value = value;
         (*stack)->next = NULL;
+		(*stack)->past = NULL;
     }
     else
     {
         tmp = (t_stack *)malloc(sizeof(t_stack));
         tmp->value = value;
         tmp->next = NULL;
+		tmp->past = last;
         last->next = tmp;
     }
 }

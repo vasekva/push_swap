@@ -16,6 +16,7 @@ typedef struct		s_list
 	int				value;
 	int             ind;
 	struct s_list	*next;
+	struct s_list	*past;
 }					t_stack;
 
 void	exception(char *str);

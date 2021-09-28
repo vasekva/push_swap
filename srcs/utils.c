@@ -1,6 +1,10 @@
 #include "push_swap.h"
 
-int	get_modulus(int number)
+/**
+ * Функция возвращает модуль
+ * полученного числа.
+ */
+int	ft_abs(int number)
 {
 	if (number < 0)
 		return (-number);

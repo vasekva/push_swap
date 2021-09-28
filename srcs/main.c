@@ -152,9 +152,9 @@ void do_actions(t_stack *a, t_stack *b)
             execute_two_cmds(action, &a, &b);
 		free(action);
 		printf("A: ");
-		printLinkedList(a, listLength(a));
+		printLinkedList(a);
 		printf("B: ");
-		printLinkedList(b, listLength(b));
+		printLinkedList(b);
 	}
 }
 
@@ -202,7 +202,7 @@ int main(int argc, char **argv)
 		fill_list(argv, &stack_a);
 		put_indexes(stack_a);
 		checkLinkedList(stack_a);
-		printLinkedList(stack_a, listLength(stack_a));
+		printLinkedList(stack_a);
 
 		if (argc <= 4)
         {
@@ -218,7 +218,7 @@ int main(int argc, char **argv)
 		}
 		    do_actions(stack_a, stack_b);
 		//swap(&stack_a, "a");
-        printLinkedList(stack_a, listLength(stack_a));
+        printLinkedList(stack_a);
     }
 	else
 		exception(FEWPARAMS);

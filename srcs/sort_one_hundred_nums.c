@@ -1,15 +1,15 @@
 #include "push_swap.h"
 
 /**
- * The function searches from above for the first
- * available number that is in the passed range
+ * Функция производит поиск числа сверху списка, диапазон
+ * значений которого задан переменными от min_val до max_val
  *
- * @param stack :	The stack in which to search
- * @param min_val :	min value of the range numbers
- * @param max_val : max value of the range numbers
+ * @param stack:	Стэк в котором происходит поиск
+ * @param min_val:	минимальное значения диапазона
+ * @param max_val:	максимальное значение диапазона
  *
- * @return	returns an index of the searched number,
- * if the number is not found returns 0
+ * @return	Возвращает индекс искомого числа, найденного
+ * при проходке сверху списка
  */
 int	find_first_val_front(t_stack *stack, int min_val, int max_val)
 {
@@ -25,28 +25,29 @@ int	find_first_val_front(t_stack *stack, int min_val, int max_val)
 	return (0);
 }
 
-
 /**
- * The function searches from below for the first
- * available number that is in the passed range
+ * Функция производит поиск числа снизу списка, диапазон
+ * значений которого задан переменными от min_val до max_val
+ * Если функция доходит до индекса, заданного переменной
+ * frontInd - поиск прекращается.
  *
- * @param stack :	The stack in which to search
- * @param min_val :	min value of the range numbers
- * @param max_val : max value of the range numbers
+ * @param stack :	Стэк в котором происходит поиск.
+ * @param min_val :	минимальное значения диапазона.
+ * @param max_val : максимальное значение диапазона.
  *
- * @return	returns an index of the searched number,
- * if the number is not found returns 0
+ * @return	Возвращает индекс искомого числа, найденного
+ * при проходке снизу списка.
  */
-int	find_first_val_back(t_stack *stack, int min_val, int max_val)
+int	find_first_val_back(t_stack *stack, int frontInd, int min_val, int max_val)
 {
 	t_stack *tmp;
 
-	tmp = stack;
-	while (tmp)
+	tmp = getLast(stack);
+	while (tmp && tmp->ind != frontInd)
 	{
 		if (tmp->value >= min_val && tmp->value <= max_val)
 			return (tmp->ind);
-		tmp = tmp->next;
+		tmp = tmp->past;
 	}
 	return (0);
 }
@@ -58,7 +59,7 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int range_s
 	i = 0;
 	// Вычисление 5ти диапазонов значений исходя
 	// из максимального и минимального числа в списке
-	while (++i <= 5)
+	while (++i <= 1)
 	{
 		int range = range_size * i;
 		int	minRangeValue = range_size * i - range_size;
@@ -66,6 +67,11 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int range_s
 		printf("Range #%d: %d - %d;\n", i, minRangeValue, maxRangeValue);
 		int frontInd = find_first_val_front(*stack_a, minRangeValue, maxRangeValue);
 		printf("FrontInd: %d\n", frontInd);
+		int backInd = find_first_val_back(*stack_a, frontInd, minRangeValue, maxRangeValue);
+		printf("BackInd: %d\n", backInd);
+
+		//todo: определить наивыгодное направление кручения стека
+
 	}
 }
 

@@ -27,7 +27,7 @@ void	cycle_rotate_stack(t_stack **a, t_stack **b, int req_index)
 		++mid_pos;
 	if (req_index < 0 || req_index == mid_pos) // если позиция для вставки в правой половине
 	{
-		count = get_modulus(--req_index) + 1;
+		count = ft_abs(--req_index) + 1;
 		while (++i < count)
 		{
 			reverse_rotate(a, "a");
@@ -38,7 +38,7 @@ void	cycle_rotate_stack(t_stack **a, t_stack **b, int req_index)
 	}
 	else // если в левой половине
 	{
-		count = get_modulus(req_index) + 1;
+		count = ft_abs(req_index) + 1;
 		while (++i < count)
 		{
 			rotate(a, "a");

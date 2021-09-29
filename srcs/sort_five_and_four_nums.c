@@ -30,22 +30,22 @@ void	cycle_rotate_stack(t_stack **a, t_stack **b, int req_index)
 		count = ft_abs(--req_index) + 1;
 		while (++i < count)
 		{
-			reverse_rotate(a, "a");
+			reverse_rotate(a, "a", 1);
 		}
-		push(b, a, "a");
+		push(b, a, "a", 1);
 		while (count--)
-			rotate(a, "a");
+			rotate(a, "a", 1);
 	}
 	else // если в левой половине
 	{
 		count = ft_abs(req_index) + 1;
 		while (++i < count)
 		{
-			rotate(a, "a");
+			rotate(a, "a", 1);
 		}
-		push(b, a, "a");
+		push(b, a, "a", 1);
 		while (--count)
-			reverse_rotate(a, "a");
+			reverse_rotate(a, "a", 1);
 	}
 }
 
@@ -55,11 +55,11 @@ void	put_value_to_list(t_stack **a, t_stack **b)
 
 	tmp = (*a);
 	if ((*b)->value < (*a)->value)
-		push(b, a, "a");
+		push(b, a, "a", 1);
 	else if ((*b)->value > getLast(tmp)->value)
 	{
-		push(b, a, "a");
-		rotate(a, "a");
+		push(b, a, "a", 1);
+		rotate(a, "a", 1);
 	}
 	else
 	{
@@ -72,7 +72,7 @@ void	sort_five_and_four_nums(t_stack **a, t_stack **b)
 {
 	if (listLength(*a) == 4)
 	{
-		push(a, b, "b");
+		push(a, b, "b", 1);
 		little_sort(a);
 		put_value_to_list(a, b);
 	}

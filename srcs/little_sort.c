@@ -46,24 +46,24 @@ void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *stack_na
 {
 	if (ind_min == 1 && ind_max == 2) // 132
 	{
-		swap(stack, stack_name);
-		rotate(stack, stack_name);
+		swap(stack, stack_name, 1);
+		rotate(stack, stack_name, 1);
 	}
 	else if (ind_min != 1 && ind_max != 1)
 	{
 		if (ind_min == 2) // 213
-			swap(stack, stack_name);
+			swap(stack, stack_name, 1);
 		else // 231
-			reverse_rotate(stack, stack_name);
+			reverse_rotate(stack, stack_name, 1);
 	}
 	else if  (ind_max == 1)
 	{
 		if (ind_min == 2) //312
-			rotate(stack, stack_name);
+			rotate(stack, stack_name, 1);
 		else
 		{
-			swap(stack, "a");
-			reverse_rotate(stack, stack_name);
+			swap(stack, "a", 1);
+			reverse_rotate(stack, stack_name, 1);
 		}
 	}
 }
@@ -77,7 +77,7 @@ void	little_sort(t_stack **stack)
     ind_min = find_ind_min(*stack);
     if (listLength(*stack) == 2 && ind_max == 1)
     {
-		swap(stack, "a");
+		swap(stack, "a", 1);
 		return ;
 	}
     else

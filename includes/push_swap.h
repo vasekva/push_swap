@@ -41,11 +41,11 @@ void	sort_five_and_four_nums(t_stack **stack_a, t_stack **stack_b);
 void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b);
 
 
-void	swap(t_stack **stack_a, char *name);
-void	push(t_stack **src, t_stack **dst, char *name);
-void	rotate(t_stack **stack, char *name);
-void	reverse_rotate(t_stack **stack, char *name);
-void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b);
+void	swap(t_stack **stack_a, char *name, int count);
+void	push(t_stack **src, t_stack **dst, char *name, int count);
+void	rotate(t_stack **stack, char *name, int count);
+void	reverse_rotate(t_stack **stack, char *name, int count);
+void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b, int count);
 
 
 /*

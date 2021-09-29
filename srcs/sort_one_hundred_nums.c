@@ -2,21 +2,22 @@
 
 /**
  * Функция производит поиск числа сверху списка, диапазон
- * значений которого задан переменными от min_val до max_val
+ * значений которого задан переменными от min_val до max_val.
  *
- * @param stack:	Стэк в котором происходит поиск
- * @param min_val:	минимальное значения диапазона
- * @param max_val:	максимальное значение диапазона
+ * @param stack:	Стэк в котором происходит поис.
+ * @param min_val:	минимальное значения диапазона.
+ * @param max_val:	максимальное значение диапазона.
  *
  * @return	Возвращает индекс искомого числа, найденного
- * при проходке сверху списка
+ * при проходке сверху списка.\n
+ * Если индекс заходит на вторую половину списка - поиск прекращается
  */
 int	find_first_val_front(t_stack *stack, int min_val, int max_val)
 {
 	t_stack *tmp;
 
 	tmp = stack;
-	while (tmp)
+	while (tmp && tmp->ind >= 0)
 	{
 		if (tmp->value >= min_val && tmp->value <= max_val)
 			return (tmp->ind);
@@ -29,7 +30,7 @@ int	find_first_val_front(t_stack *stack, int min_val, int max_val)
  * Функция производит поиск числа снизу списка, диапазон
  * значений которого задан переменными от min_val до max_val
  * Если функция доходит до индекса, заданного переменной
- * frontInd - поиск прекращается.
+ * frontInd или до первой половины стека - поиск прекращается.
  *
  * @param stack :	Стэк в котором происходит поиск.
  * @param min_val :	минимальное значения диапазона.
@@ -43,7 +44,7 @@ int	find_first_val_back(t_stack *stack, int frontInd, int min_val, int max_val)
 	t_stack *tmp;
 
 	tmp = getLast(stack);
-	while (tmp && tmp->ind != frontInd)
+	while (tmp && tmp->ind != frontInd && tmp->ind < 0)
 	{
 		if (tmp->value >= min_val && tmp->value <= max_val)
 			return (tmp->ind);
@@ -72,6 +73,31 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int range_s
 
 		//todo: определить наивыгодное направление кручения стека
 
+		// если оба индекса равны 0 и значение под этим индексом
+		// не в диапазоне значений - число не найдено
+		if (frontInd == 0 && backInd == 0 && ((*stack_a)->value <= minRangeValue
+			|| (*stack_a)->value >= maxRangeValue))
+				continue;
+		else
+		{
+			// если число найдено только в одной половине стека
+			if (backInd == 0 || frontInd == 0)
+			{
+				if (backInd == 0)
+					rotate(stack_a, "a", frontInd);
+				else
+					reverse_rotate(stack_a, "a", ft_abs(backInd));
+			}
+			else
+			{
+				// если индекс сверху меньше либо равен модулю индекса снизу и он
+				// в первой половине чисел
+				if (frontInd <= ft_abs(backInd) && frontInd >= 0)
+					rotate(stack_a, "a", ft_abs(frontInd));
+				else
+					reverse_rotate(stack_a, "a", ft_abs(backInd));
+			}
+		}
 	}
 }
 

@@ -8,6 +8,11 @@ void	push_stack_b(t_stack **stack_a, t_stack **stack_b)
 	number = (*stack_a)->value;
 	put_ind = find_put_ind(*stack_b, number);
 	//printf("PUT: %d after %d\n", number, put_ind);
+	if (!(*stack_b))
+	{
+		push(stack_a, stack_b, "b", 1);
+		return;
+	}
 	if (put_ind == 0)
 	{
 		if (number < (*stack_b)->value)

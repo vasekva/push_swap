@@ -203,7 +203,7 @@ int main(int argc, char **argv)
 		fill_list(argv, &stack_a);
 		put_indexes(stack_a);
 		checkLinkedList(stack_a);
-		printLinkedList(stack_a);
+		//printLinkedList(stack_a);
 
 		if (argc <= 4)
         {
@@ -218,7 +218,10 @@ int main(int argc, char **argv)
 			sort_one_hundred_nums(&stack_a, &stack_b);
 		}
 		printf("REZ: \n\n");
-        printLinkedList(stack_a);
+
+		printf("A:\n");
+		printLinkedList(stack_a);
+		printf("B:\n");
 		printLinkedList(stack_b);
 	}
 	else

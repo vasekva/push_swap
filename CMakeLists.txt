@@ -29,7 +29,9 @@ add_executable(push_swap
         srcs/exception.c
         srcs/get_next_line.c
         srcs/little_sort.c
+        srcs/little_sort_reverse.c
         srcs/main.c
+        srcs/push_stack_b.c
         srcs/sort_five_and_four_nums.c
         srcs/sort_one_hundred_nums.c
         srcs/utils.c

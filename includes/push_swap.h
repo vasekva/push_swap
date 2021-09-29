@@ -34,10 +34,12 @@ void	pushBack(t_stack **stack, int value);
 void    put_indexes(t_stack *stack);
 
 void	little_sort(t_stack **stack);
-void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *stack_name);
-
+void	little_sort_reverse(t_stack **stack);
 
 void	sort_five_and_four_nums(t_stack **stack_a, t_stack **stack_b);
+int		find_put_ind(t_stack *stack, int required_number);
+
+
 void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b);
 
 
@@ -48,10 +50,13 @@ void	reverse_rotate(t_stack **stack, char *name, int count);
 void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b, int count);
 
 
+void	push_stack_b(t_stack **stack_a, t_stack **stack_b);
+
+
 /*
  * UTILS.C
  */
 int	ft_abs(int number);
 
-
+//33 12 3 -100 -150
 #endif

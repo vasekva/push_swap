@@ -42,7 +42,7 @@ static int	find_ind_max(t_stack *stack)
 	return (ind_max);
 }
 
-void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *stack_name)
+static void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *stack_name)
 {
 	if (ind_min == 0 && ind_max == 1) // 132
 	{
@@ -75,7 +75,7 @@ void	little_sort(t_stack **stack)
 
     ind_max = find_ind_max(*stack);
     ind_min = find_ind_min(*stack);
-    if (listLength(*stack) == 2 && ind_max == 1)
+    if (listLength(*stack) == 2 && ind_max == 0)
     {
 		swap(stack, "a", 1);
 		return ;

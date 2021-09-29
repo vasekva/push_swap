@@ -187,6 +187,7 @@ void    put_indexes(t_stack *stack)
 }
 
 //TODO: посмотреть работу strjoin с неаллоцированными строками
+//TODO: проверить работу программы при вводе пустого символа '-'
 int main(int argc, char **argv)
 {
 	t_stack *stack_a;
@@ -216,11 +217,10 @@ int main(int argc, char **argv)
 		{
 			sort_one_hundred_nums(&stack_a, &stack_b);
 		}
-		//printf("hELLO\n");
-		    //do_actions(stack_a, stack_b);
-		//swap(&stack_a, "a");
+		printf("REZ: \n\n");
         printLinkedList(stack_a);
-    }
+		printLinkedList(stack_b);
+	}
 	else
 		exception(FEWPARAMS);
 	return (0);

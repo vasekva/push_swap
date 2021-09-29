@@ -1,15 +1,19 @@
 #include "push_swap.h"
 
-int		find_put_ind(t_stack *a, int required_number)
+int		find_put_ind(t_stack *stack, int required_number)
 {
 	t_stack *tmp;
 
-	tmp = a;
+	tmp = stack;
 	while (tmp)
 	{
-		if (tmp->value < required_number
-			&& tmp->next->value > required_number)
-			return (tmp->ind);
+		if (tmp->value > required_number)
+		{
+			if (!tmp->next)
+				return (tmp->ind);
+			if (tmp->next->value < required_number)
+				return (tmp->ind);
+		}
 		tmp = tmp->next;
 	}
 	return (0);

@@ -65,13 +65,11 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int range_s
 		int range = range_size * i;
 		int	minRangeValue = range_size * i - range_size;
 		int	maxRangeValue = range - 1;
-		printf("Range #%d: %d - %d;\n", i, minRangeValue, maxRangeValue);
+		//printf("Range #%d: %d - %d;\n", i, minRangeValue, maxRangeValue);
 		int frontInd = find_first_val_front(*stack_a, minRangeValue, maxRangeValue);
-		printf("FrontInd: %d\n", frontInd);
+		//printf("FrontInd: %d\n", frontInd);
 		int backInd = find_first_val_back(*stack_a, frontInd, minRangeValue, maxRangeValue);
-		printf("BackInd: %d\n", backInd);
-
-		//todo: определить наивыгодное направление кручения стека
+		//printf("BackInd: %d\n", backInd);
 
 		// если оба индекса равны 0 и значение под этим индексом
 		// не в диапазоне значений - число не найдено
@@ -108,14 +106,33 @@ void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 	int	amnt_of_nmbs;
 	int	range_size;
 
-	max = find_max_value(*stack_a);
-	min	= find_min_value(*stack_a);
-	printf("%d\n", max);
-	printf("%d\n", min);
-	amnt_of_nmbs = max - min + 1;
-	printf("Number of values between them: %d\n", amnt_of_nmbs);
-	range_size = amnt_of_nmbs / 5;
-	printf("Range of values in each group: %d\n", range_size);
+	push(stack_a, stack_b, "b", 3);
+	little_sort_reverse(stack_b);
 
-	find_range_numbers(stack_a, stack_b, range_size);
+	//int count = 9;
+	//int count = 14;
+	//int count = 16;
+	while ((*stack_a))
+	//while (count--)
+	{
+		max = find_max_value(*stack_a);
+		min = find_min_value(*stack_a);
+		//printf("%d\n", max);
+		//printf("%d\n", min);
+		amnt_of_nmbs = max - min + 1;
+		//printf("Number of values between them: %d\n", amnt_of_nmbs);
+		range_size = amnt_of_nmbs / 5;
+		//printf("Range of values in each group: %d\n", range_size);
+
+		find_range_numbers(stack_a, stack_b, range_size);
+		//todo: сделать вычисление позиции вставки числа из стека a в b
+		//TODO: ПРОВЕРИТЬ ЗАНОСЯТСЯ ЛИ ЧИСЛА ПО ГРУППАМ(RANGE)
+		//printLinkedList(*stack_a);
+		//printLinkedList(*stack_b);
+		push_stack_b(stack_a, stack_b);
+	}
+
+	while (*stack_b)
+		push(stack_b, stack_a, "a", 1);
+
 }

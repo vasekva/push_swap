@@ -6,7 +6,7 @@ static int find_ind_min(t_stack *stack)
 	int		min_val;
     t_stack	*tmp;
 
-	ind_min = 1;
+	ind_min = 0;
 	min_val = stack->value;
 	tmp = stack;
     while (tmp)
@@ -27,7 +27,7 @@ static int	find_ind_max(t_stack *stack)
 	int		max_val;
 	t_stack	*tmp;
 
-	ind_max = 1;
+	ind_max = 0;
 	max_val = stack->value;
 	tmp = stack;
 	while (tmp)
@@ -44,21 +44,21 @@ static int	find_ind_max(t_stack *stack)
 
 void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *stack_name)
 {
-	if (ind_min == 1 && ind_max == 2) // 132
+	if (ind_min == 0 && ind_max == 1) // 132
 	{
 		swap(stack, stack_name, 1);
 		rotate(stack, stack_name, 1);
 	}
-	else if (ind_min != 1 && ind_max != 1)
+	else if (ind_min != 0 && ind_max != 0)
 	{
-		if (ind_min == 2) // 213
+		if (ind_min == 1) // 213
 			swap(stack, stack_name, 1);
 		else // 231
 			reverse_rotate(stack, stack_name, 1);
 	}
-	else if  (ind_max == 1)
+	else if  (ind_max == 0)
 	{
-		if (ind_min == 2) //312
+		if (ind_min == 1) //312
 			rotate(stack, stack_name, 1);
 		else
 		{

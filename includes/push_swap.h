@@ -57,6 +57,7 @@ void	push_stack_b(t_stack **stack_a, t_stack **stack_b);
  * UTILS.C
  */
 int	ft_abs(int number);
+void	print_action_message(char *stack_name, char *action);
 
 //33 12 3 -100 -150
 #endif

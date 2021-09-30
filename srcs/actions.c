@@ -6,21 +6,21 @@ void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b, int count)
 	{
 		if (!ft_strncmp("ss", cmd, ft_strlen(cmd)))
 		{
-			printf("%s\n", "ss");
 			swap(a, NULL, 1);
 			swap(b, NULL, 1);
+			print_action_message(NULL, "ss");
 		}
 		else if (!ft_strncmp("rr", cmd, ft_strlen(cmd)))
 		{
-			printf("%s\n", "rr");
 			rotate(a, NULL, 1);
 			rotate(b, NULL, 1);
+			print_action_message(NULL, "rr");
 		}
 		else if (!ft_strncmp("rrr", cmd, ft_strlen(cmd)))
 		{
-			printf("%s\n", "rrr");
 			reverse_rotate(a, NULL, 1);
 			reverse_rotate(b, NULL, 1);
+			print_action_message(NULL, "rrr");
 		}
 	}
 }
@@ -39,9 +39,7 @@ void	push(t_stack **src, t_stack **dst, char *name, int count)
 		*src = tmp;
 		put_indexes(*src);
 		put_indexes(*dst);
-		if (name) {
-			printf("%s\n", ft_strjoin("p", name));
-		}
+		print_action_message(name, "p");
 	}
 }
 
@@ -58,9 +56,7 @@ void	swap(t_stack **stack, char *name, int count)
 		tmp->next = (*stack);
 		(*stack) = tmp;
 		put_indexes(*stack);
-		if (name) {
-			printf("%s\n", ft_strjoin("s", name));
-		}
+		print_action_message(name, "s");
 	}
 }
 
@@ -79,9 +75,7 @@ void	rotate(t_stack **stack, char *name, int count)
 		(*stack) = (*stack)->next;
 		tmp->next->next = NULL;
 		put_indexes(*stack);
-		if (name) {
-			printf("%s\n", ft_strjoin("r", name));
-		}
+		print_action_message(name, "r");
 	}
 }
 
@@ -102,8 +96,6 @@ void reverse_rotate(t_stack **stack, char *name, int count)
 		last->next = (*stack);
 		(*stack) = last;
 		put_indexes(*stack);
-		if (name) {
-			printf("%s\n", ft_strjoin("rr", name));
-		}
+		print_action_message(name, "rr");
 	}
 }

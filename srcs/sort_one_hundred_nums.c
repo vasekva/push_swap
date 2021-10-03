@@ -47,23 +47,23 @@ int	find_first_val_back(t_stack *stack, int frontInd, int min_val, int max_val)
 	return (0);
 }
 
-static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minValue,
+static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b,
 								  int range_size, int i)
 {
 	int range = range_size * i;
 	int	minRangeValue;
 	int	maxRangeValue;
 
-	if (range == 1)
+	if (range <= 20)
 	{
-		minRangeValue = (*stack_a)->value;
-		maxRangeValue = (*stack_a)->value;
+		minRangeValue = (*stack_a)->min_value;
+		maxRangeValue = (*stack_a)->max_value;
 	}
 	else {
-		minRangeValue = minValue + range_size * (i - 1);
+		minRangeValue = (*stack_a)->min_value + range_size * (i - 1);
 		maxRangeValue = minRangeValue + range_size - 1;
 	}
-	printf("Range #%d: %d - %d;\n", i, minRangeValue, maxRangeValue);
+	//printf("Range #%d: %d - %d;\n", i, minRangeValue, maxRangeValue);
 	i = 0;
 	while (i++ < range_size)
 	{
@@ -71,7 +71,7 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minValu
 		//printf("FrontInd: %d\n", frontInd);
 		int backInd = find_first_val_back(*stack_a, frontInd, minRangeValue, maxRangeValue);
 		//printf("BackInd: %d\n", backInd);
-		printf("Min: %d Max: %d\n", minRangeValue, maxRangeValue);
+		//printf("Min: %d Max: %d\n", minRangeValue, maxRangeValue);
 
 		// если оба индекса равны 0 и значение под этим индексом
 		// не в диапазоне значений - число не найдено
@@ -105,29 +105,32 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minValu
 
 void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 {
-	int	max;
-	int	min;
 	int	amnt_of_nmbs;
 	int	range_size;
 	int	i;
 
-	max = find_max_value(*stack_a);
-	min = find_min_value(*stack_a);
+	(*stack_a)->max_value = find_max_value(*stack_a);
+	(*stack_a)->min_value = find_min_value(*stack_a);
 	//printf("%d\n", max);
 	//printf("%d\n", min);
-	amnt_of_nmbs = max - min + 1;
-	printf("Number of values between them: %d\n", amnt_of_nmbs);
-	range_size = amnt_of_nmbs / (listLength(*stack_a) / 20);
+	amnt_of_nmbs = (*stack_a)->max_value - (*stack_a)->min_value + 1;
+	//printf("Number of values between them: %d\n", amnt_of_nmbs);
+
+	int len = listLength(*stack_a);
+	if (len <= 20)
+		range_size = len;
+	else
+		range_size = amnt_of_nmbs / (listLength(*stack_a) / 20);
 	//if (listLength(*stack_a) % 20 > 0)
 	//	++range_size;
-	printf("RangeSize: %d\n", range_size);
+	//printf("RangeSize: %d\n", range_size);
 
 	i = 1;
 	while ((*stack_a))
 	{
 		//TODO: ПРОВЕРИТЬ ЗАНОСЯТСЯ ЛИ ЧИСЛА ПО ГРУППАМ(RANGE)
 		//TODO: Программа крашится при кол-во отличном от 500 и 100 - найти ошибку
-		find_range_numbers(stack_a, stack_b, min, range_size, i++);
+		find_range_numbers(stack_a, stack_b, range_size, i++);
 	}
 	while (*stack_b)
 		push(stack_b, stack_a, "a", 1);

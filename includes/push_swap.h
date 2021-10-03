@@ -14,6 +14,8 @@
 typedef struct		s_list
 {
 	int				value;
+	int				max_value;
+	int				min_value;
 	int             ind;
 	struct s_list	*next;
 	struct s_list	*past;
@@ -58,6 +60,7 @@ void	push_stack_b(t_stack **stack_a, t_stack **stack_b);
  */
 int	ft_abs(int number);
 void	print_action_message(char *stack_name, char *action);
+void	arr_free(char **array);
 
 //33 12 3 -100 -150
 #endif

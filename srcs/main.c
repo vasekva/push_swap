@@ -10,10 +10,9 @@ int	is_int_num(char *str)
 	// проверка на то, что строка - число
 	while (str[++i])
 	{
-		if (i == 0 && str[i] == '-')
+		if (i == 0 && str[i] == '-'
+			&& ft_isdigit(str[i + 1]))
 			continue ;
-		if (str[i] == ' ')
-			continue;
 		if (!ft_isdigit(str[i]))
 		{
 			exception(NOTDIGIT);
@@ -25,15 +24,42 @@ int	is_int_num(char *str)
 	return ((int)number);
 }
 
+int	has_spaces(const char *str)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == ' ')
+			return (1);
+	}
+	return (0);
+}
+
 int	parse_parameters(char **argv)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	**array;
 
 	i = 0;
+	j = -1;
+	array = NULL;
 	// проверка валидности чисел в массиве
 	while (argv[++i])
 	{
-		is_int_num(argv[i]);
+		if (has_spaces(argv[i]))
+		{
+			array = ft_split(argv[i], ' ');
+			while (array[++j])
+			{
+				is_int_num(array[j]);
+			}
+			arr_free(array);
+		}
+		else
+			is_int_num(argv[i]);
 	}
 	return (0);
 }
@@ -61,19 +87,6 @@ void	checkLinkedList(const t_stack *stack)
 		p_iter = p; // обнуление указателя
 		stack = stack->next;
 	}
-}
-
-int	has_spaces(const char *str)
-{
-	int i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == ' ')
-			return (1);
-	}
-	return (0);
 }
 
 void	fill_list(char **argv, t_stack **stack)
@@ -197,27 +210,25 @@ int main(int argc, char **argv)
     stack_b = NULL;
 	if (argc >= 2)
 	{
-	    if (argc == 2)
-            return (0);
 		parse_parameters(argv);
 		fill_list(argv, &stack_a);
 		put_indexes(stack_a);
 		checkLinkedList(stack_a);
-		//printLinkedList(stack_a);
+		printLinkedList(stack_a);
 
 		if (argc <= 4)
         {
 		    little_sort(&stack_a);
         }
-		else if (argc >= 5 && argc <= 6)
+		/*else if (argc >= 5 && argc <= 6)
 		{
 			sort_five_and_four_nums(&stack_a, &stack_b);
-		}
+		}*/
 		else
 		{
 			sort_one_hundred_nums(&stack_a, &stack_b);
 		}
-		printf("REZ: \n\n");
+		printf("REZ: \n");
 
 		printf("A:\n");
 		printLinkedList(stack_a);

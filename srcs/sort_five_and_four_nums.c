@@ -39,66 +39,15 @@ int		find_put_ind(t_stack *stack, int required_number, int flag)
 	return (0);
 }
 
-void	cycle_rotate_stack(t_stack **a, t_stack **b, int req_index)
-{
-	int mid_pos;
-	int count;
-	int	i;
-
-	i = 0;
-	mid_pos = listLength(*a) / 2;
-	if (listLength(*a) % 2 != 0)
-		++mid_pos;
-	if (req_index < 0 || req_index == mid_pos) // если позиция для вставки в правой половине
-	{
-		count = ft_abs(--req_index) + 1;
-		while (++i < count)
-		{
-			reverse_rotate(a, "a", 1);
-		}
-		push(b, a, "a", 1);
-		while (count--)
-			rotate(a, "a", 1);
-	}
-	else // если в левой половине
-	{
-		count = ft_abs(req_index) + 1;
-		while (++i < count)
-		{
-			rotate(a, "a", 1);
-		}
-		push(b, a, "a", 1);
-		while (--count)
-			reverse_rotate(a, "a", 1);
-	}
-}
-
-void	put_value_to_list(t_stack **a, t_stack **b)
-{
-	t_stack *tmp;
-
-	tmp = (*a);
-	if ((*b)->value < (*a)->value)
-		push(b, a, "a", 1);
-	else if ((*b)->value > getLast(tmp)->value)
-	{
-		push(b, a, "a", 1);
-		rotate(a, "a", 1);
-	}
-	else
-	{
-		//printLinkedList(*a, listLength(*a));
-		cycle_rotate_stack(a, b, find_put_ind(*a, (*b)->value, 0));
-	}
-}
-
 static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b)
 {
 	//printf("Range #%d: %d - %d;\n", i, minRangeValue, maxRangeValue);
+	int		flag;
+	t_stack *nth;
 
 
-
-
+	flag = 0;
+	nth = NULL;
 	while (*stack_b)
 	{
 		/*
@@ -108,7 +57,22 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b)
 		printLinkedList(*stack_b);
 		//*/
 		int ind = find_put_ind(*stack_a, (*stack_b)->value, 1);
-		//printf("IND: %d\n", ind);
+		if ((*stack_b)->next)
+		// если в б несколько элементов
+		{
+			if ((*stack_b)->value > (*stack_b)->next->value) // если первое больше второго
+			{
+				nth = get_nth(*stack_a, ind);
+				if (nth->past)
+					if (nth->past->value < (*stack_b)->next->value)
+						flag = 1;
+			}
+		}
+		/*
+		printf("VAL: %d\n", get_nth(*stack_a, ind)->value);
+		printf("IND: %d\n", ind);
+		printf("FLAG: %d\n", flag);
+		 */
 		if (ind == -1 || ind == 0)
 		{
 			if (ind == -1)
@@ -117,12 +81,22 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b)
 				{
 					push(stack_b, stack_a, "a", 1);
 					rotate(stack_a, "a", ft_abs(ind));
+					flag = 0;
 				}
 				else
 				{
 					reverse_rotate(stack_a, "a", 1);
-					push(stack_b, stack_a, "a", 1);
-					rotate(stack_a, "a", 2);
+					if (flag == 1) // если нужно переместить сразу два числа из b в a
+					{
+						push(stack_b, stack_a, "a", 2);
+						rotate(stack_a, "a", 3);
+						flag = 0;
+					}
+					else
+					{
+						push(stack_b, stack_a, "a", 1);
+						rotate(stack_a, "a", 2);
+					}
 				}
 			}
 			else
@@ -148,13 +122,11 @@ void	sort_five_and_four_nums(t_stack **a, t_stack **b)
 		push(a, b, "b", 1);
 		little_sort(a);
 		find_range_numbers(a, b);
-		//put_value_to_list(a, b);
 	}
 	else
 	{
 		push(a, b, "b", 2);
 		little_sort(a);
 		find_range_numbers(a, b);
-		//put_value_to_list(a, b);
 	}
 }

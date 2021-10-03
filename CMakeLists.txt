@@ -19,6 +19,7 @@ add_executable(push_swap
         libft/srcs/second_part/ft_substr.c
 
         srcs/lists/getLast.c
+        srcs/lists/get_nth.c
         srcs/lists/listLength.c
         srcs/lists/printLinkedList.c
         srcs/lists/pushBack.c

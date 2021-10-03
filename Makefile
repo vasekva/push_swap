@@ -10,7 +10,7 @@ SRCS_NAME		=	actions.c exception.c get_next_line.c little_sort.c little_sort_rev
 					main.c push_stack_b.c sort_five_and_four_nums.c sort_one_hundred_nums.c utils.c \
 
 LISTS_FUNCS		=	find_max_value.c find_min_value.c getLast.c listLength.c \
-                    printLinkedList.c pushBack.c put_past_pointers.c \
+                    printLinkedList.c pushBack.c put_past_pointers.c get_nth.c \
 
 OBJS_NAME	=	$(SRCS_NAME:.c=.o) $(LISTS_FUNCS:.c=.o)
 

@@ -35,6 +35,7 @@ void	printLinkedList(const t_stack *stack);
 void	pushBack(t_stack **stack, int value);
 void    put_indexes(t_stack *stack);
 void	put_past_pointers(t_stack *stack);
+t_stack	*get_nth(t_stack *stack, int n);
 
 
 void	little_sort(t_stack **stack);

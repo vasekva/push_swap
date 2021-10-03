@@ -24,6 +24,7 @@ add_executable(push_swap
         srcs/lists/pushBack.c
         srcs/lists/find_max_value.c
         srcs/lists/find_min_value.c
+        srcs/lists/put_past_pointers.c
 
         srcs/actions.c
         srcs/exception.c

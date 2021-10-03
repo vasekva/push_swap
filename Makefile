@@ -10,7 +10,7 @@ SRCS_NAME		=	actions.c exception.c get_next_line.c little_sort.c little_sort_rev
 					main.c push_stack_b.c sort_five_and_four_nums.c sort_one_hundred_nums.c utils.c \
 
 LISTS_FUNCS		=	find_max_value.c find_min_value.c getLast.c listLength.c \
-                    printLinkedList.c pushBack.c \
+                    printLinkedList.c pushBack.c put_past_pointers.c \
 
 OBJS_NAME	=	$(SRCS_NAME:.c=.o) $(LISTS_FUNCS:.c=.o)
 
@@ -25,10 +25,10 @@ CFLAGS		=	-Wall -Wextra -Werror -g
 all: 			$(NAME)
 
 $(NAME):		$(OBJS)
-				@echo "\033[1m\033[35m===	COMPILATION MINISHELL...			\033[1m==="
+				@echo "\033[1m\033[35m===	COMPILATION PUSH_SWAP...			\033[1m==="
 				@$(MAKE)	-C			$(LIBFT_DIR)
 				@$(CC)	$(LIBRARY)	$(OBJS)	-o $(NAME)
-				@echo "\033[1m\033[35m===	MINISHELL COMPILATION WAS \033[32mSUCCESFULL		\033[1m\033[35m===\n"
+				@echo "\033[1m\033[35m===	PUSH_SWAP COMPILATION WAS \033[32mSUCCESFULL		\033[1m\033[35m===\n"
 
 $(OBJS):		$(SRCS)
 				@$(CC)	$(INCLUDES)	-c	$(SRCS)
@@ -40,16 +40,16 @@ clean:
 				@echo "\033[1m\033[36m	===	CLEANING LIBFT OBJS ...				\033[1m==="
 				@$(MAKE)	clean	-C		$(LIBFT_DIR)
 				@echo "\033[1m\033[36m	===	CLEANING LIBFT OBJS \033[32mOK				\033[36m\033[1m==="
-				@echo "\033[1m\033[36m	===	CLEANING MINISHELL OBJS ...			\033[1m==="
+				@echo "\033[1m\033[36m	===	CLEANING PUSH_SWAP OBJS ...			\033[1m==="
 				@rm -rf	$(OBJS)
-				@echo "\033[1m\033[36m	===	CLEANING MINISHELL OBJS \033[32mOK			\033[1m\033[36m==="
+				@echo "\033[1m\033[36m	===	CLEANING PUSH_SWAP OBJS \033[32mOK			\033[1m\033[36m==="
 				@echo "\033[1m\033[35m===	ALL OBJS FILES HAVE BEEN CLEANED \033[32mSUCCESSFULLY	\033[35m\033[1m===\n"
 
 fclean:			clean
 				@echo "\033[1m\033[35m===	DELETING DIRECTORIES AND OTHER FILES...		===\033[0m"
 				@$(MAKE)	fclean	-C		$(LIBFT_DIR)
 				@rm -rf	$(NAME)
-				@echo "\033[1m\033[36m	===	REMOVING minishell 	\033[32mOK			\033[1m\033[36m==="
+				@echo "\033[1m\033[36m	===	REMOVING push_swap 	\033[32mOK			\033[1m\033[36m==="
 				@rm -rf	$(OBJS_DIR)
 				@echo "\033[1m\033[36m	===	REMOVING ./objs		\033[32mOK			\033[1m\033[36m==="
 				@echo	"\033[1m\033[35m===	ALL CREATED FILES HAVE BEEN \033[32mDELETED SUCCESSFULLY \033[1m\033[35m==="

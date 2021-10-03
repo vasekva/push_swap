@@ -199,41 +199,80 @@ void    put_indexes(t_stack *stack)
     }
 }
 
+int	is_sorted(t_stack *stack)
+{
+	while (stack->next)
+	{
+		if (stack->value > stack->next->value)
+			return (-1);
+		stack = stack->next;
+	}
+	return (1);
+}
+
 //TODO: посмотреть работу strjoin с неаллоцированными строками
 //TODO: проверить работу программы при вводе пустого символа '-'
 int main(int argc, char **argv)
 {
 	t_stack *stack_a;
 	t_stack	*stack_b;
+	int		list_length;
 
     stack_a = NULL;
     stack_b = NULL;
+
+    /*
+	pushBack(&stack_a, 1);
+	pushBack(&stack_a, 2);
+	pushBack(&stack_a, 3);
+	pushBack(&stack_a, 4);
+	pushBack(&stack_a, 5);
+	swap(&stack_a, "a", 1);
+	rotate(&stack_a, "a", 3);
+	put_past_pointers(stack_a);
+	while (stack_a)
+	{
+		if (stack_a->past)
+			printf("VAL: %d PAST: %d\n", stack_a->value, stack_a->past->value);
+		else
+			printf("VAL: %d PAST: NULL\n", stack_a->value);
+		stack_a = stack_a->next;
+	}
+
+	return (0);*/
+
 	if (argc >= 2)
 	{
 		parse_parameters(argv);
 		fill_list(argv, &stack_a);
+		if (is_sorted(stack_a) == 1)
+			return (0);
+		list_length = listLength(stack_a);
 		put_indexes(stack_a);
 		checkLinkedList(stack_a);
-		printLinkedList(stack_a);
+		//printLinkedList(stack_a);
 
-		if (argc <= 4)
+		if (list_length <= 3)
         {
 		    little_sort(&stack_a);
         }
-		/*else if (argc >= 5 && argc <= 6)
+		else if (list_length <= 5)
 		{
 			sort_five_and_four_nums(&stack_a, &stack_b);
-		}*/
+		}
 		else
 		{
 			sort_one_hundred_nums(&stack_a, &stack_b);
 		}
+
+		/*
 		printf("REZ: \n");
 
 		printf("A:\n");
 		printLinkedList(stack_a);
 		printf("B:\n");
 		printLinkedList(stack_b);
+		//*/
 	}
 	else
 		exception(FEWPARAMS);

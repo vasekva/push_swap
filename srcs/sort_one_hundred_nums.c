@@ -100,7 +100,6 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b,
 		}
 		push_stack_b(stack_a, stack_b);
 	}
-
 }
 
 void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)

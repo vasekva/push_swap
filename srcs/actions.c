@@ -34,11 +34,15 @@ void	push(t_stack **src, t_stack **dst, char *name, int count)
 		if (!(*src))
 			return ;
 		tmp = (*src)->next;
+		//tmp->past = NULL;
 		(*src)->next = *dst;
+		//(*dst)->past = (*src);
 		*dst = (*src);
 		*src = tmp;
 		put_indexes(*src);
+		put_past_pointers(*src);
 		put_indexes(*dst);
+		put_past_pointers(*dst);
 		print_action_message(name, "p");
 	}
 }
@@ -56,6 +60,7 @@ void	swap(t_stack **stack, char *name, int count)
 		tmp->next = (*stack);
 		(*stack) = tmp;
 		put_indexes(*stack);
+		put_past_pointers(*stack);
 		print_action_message(name, "s");
 	}
 }
@@ -75,6 +80,7 @@ void	rotate(t_stack **stack, char *name, int count)
 		(*stack) = (*stack)->next;
 		tmp->next->next = NULL;
 		put_indexes(*stack);
+		put_past_pointers(*stack);
 		print_action_message(name, "r");
 	}
 }
@@ -96,6 +102,7 @@ void reverse_rotate(t_stack **stack, char *name, int count)
 		last->next = (*stack);
 		(*stack) = last;
 		put_indexes(*stack);
+		put_past_pointers(*stack);
 		print_action_message(name, "rr");
 	}
 }

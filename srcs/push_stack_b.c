@@ -6,7 +6,7 @@ void	push_stack_b(t_stack **stack_a, t_stack **stack_b)
 	int	number;
 
 	number = (*stack_a)->value;
-	put_ind = find_put_ind(*stack_b, number);
+	put_ind = find_put_ind(*stack_b, number, 0);
 	//printf("PUT: %d after %d\n", number, put_ind);
 	if (!(*stack_b))
 	{

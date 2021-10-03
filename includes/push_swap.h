@@ -34,12 +34,14 @@ int	    listLength(const t_stack *stack);
 void	printLinkedList(const t_stack *stack);
 void	pushBack(t_stack **stack, int value);
 void    put_indexes(t_stack *stack);
+void	put_past_pointers(t_stack *stack);
+
 
 void	little_sort(t_stack **stack);
 void	little_sort_reverse(t_stack **stack);
 
 void	sort_five_and_four_nums(t_stack **stack_a, t_stack **stack_b);
-int		find_put_ind(t_stack *stack, int required_number);
+int		find_put_ind(t_stack *stack, int required_number, int flag);
 
 
 void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b);

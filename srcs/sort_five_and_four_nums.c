@@ -1,15 +1,11 @@
 #include "push_swap.h"
 
-
 /*
  * если флаг == 0 - массив не отсортирован
  * если флаг == 1 - массив отсортирован
  */
 int		find_put_ind(t_stack *stack, int required_number, int flag)
 {
-	//t_stack *tmp;
-
-	//tmp = stack;
 	while (stack)
 	{
 		if (stack->value > required_number)
@@ -20,6 +16,7 @@ int		find_put_ind(t_stack *stack, int required_number, int flag)
 					return (stack->ind);
 				if (stack->next->value < required_number)
 					return (stack->ind);
+
 			}
 			else
 			{
@@ -28,12 +25,12 @@ int		find_put_ind(t_stack *stack, int required_number, int flag)
 						return (stack->ind);
 			}
 		}
-		// проверка последнего числа
-		if (stack->next == NULL)
-		{
-			if (stack->value < required_number)
-				return (stack->ind);
-		}
+		if (flag == 1)
+			if (stack->next == NULL)
+			{
+				if (stack->value < required_number)
+					return (stack->ind);
+			}
 		stack = stack->next;
 	}
 	return (0);
@@ -41,7 +38,6 @@ int		find_put_ind(t_stack *stack, int required_number, int flag)
 
 static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b)
 {
-	//printf("Range #%d: %d - %d;\n", i, minRangeValue, maxRangeValue);
 	int		flag;
 	t_stack *nth;
 
@@ -50,12 +46,6 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b)
 	nth = NULL;
 	while (*stack_b)
 	{
-		/*
-		printf("A: ");
-		printLinkedList(*stack_a);
-		printf("B: ");
-		printLinkedList(*stack_b);
-		//*/
 		int ind = find_put_ind(*stack_a, (*stack_b)->value, 1);
 		if ((*stack_b)->next)
 		// если в б несколько элементов
@@ -68,11 +58,6 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b)
 						flag = 1;
 			}
 		}
-		/*
-		printf("VAL: %d\n", get_nth(*stack_a, ind)->value);
-		printf("IND: %d\n", ind);
-		printf("FLAG: %d\n", flag);
-		 */
 		if (ind == -1 || ind == 0)
 		{
 			if (ind == -1)

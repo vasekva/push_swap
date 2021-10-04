@@ -6,7 +6,6 @@ int	is_int_num(char *str)
 	long long	number;
 
 	i = -1;
-	number = 0;
 	// проверка на то, что строка - число
 	while (str[++i])
 	{
@@ -112,7 +111,7 @@ void	fill_list(char **argv, t_stack **stack)
 			pushBack(stack, ft_atoi(argv[i]));
 	}
 }
-
+/*
 void do_actions(t_stack *a, t_stack *b)
 {
 	char *action;
@@ -170,7 +169,7 @@ void do_actions(t_stack *a, t_stack *b)
 		printLinkedList(b);
 	}
 }
-
+*/
 void    put_indexes(t_stack *stack)
 {
     int mid_pos;
@@ -211,7 +210,6 @@ int	is_sorted(t_stack *stack)
 }
 
 //TODO: посмотреть работу strjoin с неаллоцированными строками
-//TODO: проверить работу программы при вводе пустого символа '-'
 int main(int argc, char **argv)
 {
 	t_stack *stack_a;
@@ -220,27 +218,6 @@ int main(int argc, char **argv)
 
     stack_a = NULL;
     stack_b = NULL;
-
-    /*
-	pushBack(&stack_a, 1);
-	pushBack(&stack_a, 2);
-	pushBack(&stack_a, 3);
-	pushBack(&stack_a, 4);
-	pushBack(&stack_a, 5);
-	swap(&stack_a, "a", 1);
-	rotate(&stack_a, "a", 3);
-	put_past_pointers(stack_a);
-	while (stack_a)
-	{
-		if (stack_a->past)
-			printf("VAL: %d PAST: %d\n", stack_a->value, stack_a->past->value);
-		else
-			printf("VAL: %d PAST: NULL\n", stack_a->value);
-		stack_a = stack_a->next;
-	}
-
-	return (0);*/
-
 	if (argc >= 2)
 	{
 		parse_parameters(argv);
@@ -250,8 +227,6 @@ int main(int argc, char **argv)
 		list_length = listLength(stack_a);
 		put_indexes(stack_a);
 		checkLinkedList(stack_a);
-		//printLinkedList(stack_a);
-
 		if (list_length <= 3)
         {
 		    little_sort(&stack_a);

@@ -240,7 +240,7 @@ int main(int argc, char **argv)
 			sort_one_hundred_nums(&stack_a, &stack_b);
 		}
 
-		/*
+		//*
 		printf("REZ: \n");
 
 		printf("A:\n");

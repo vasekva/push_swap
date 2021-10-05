@@ -54,6 +54,7 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 
 	i = 0;
 	range_size = (*stack_a)->range_size;
+	range_size = 8;
 	while (i++ < range_size && *stack_a)
 	{
 		int frontInd = find_first_val_front(*stack_a, minRangeValue, maxRangeValue);
@@ -132,6 +133,8 @@ void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 		}
 		find_range_numbers(stack_a, stack_b, minRangeValue, maxRangeValue);
 		i++;
+		if (i > 1)
+			return;
 	}
 	while (*stack_b)
 		push(stack_b, stack_a, "a", 1);

@@ -51,10 +51,12 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 {
 	int i;
 	int range_size;
+	int	rotate_count;
 
 	i = 0;
+	rotate_count = 0;
 	range_size = (*stack_a)->range_size;
-	range_size = 8;
+	//range_size = 5;
 	while (i++ < range_size && *stack_a)
 	{
 		int frontInd = find_first_val_front(*stack_a, minRangeValue, maxRangeValue);
@@ -85,7 +87,27 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 					reverse_rotate(stack_a, "a", ft_abs(backInd));
 			}
 		}
-		push_stack_b(stack_a, stack_b);
+		if (i <= 3 && listLength(*stack_b) <= 3)
+		{
+			push(stack_a, stack_b, "b", 1);
+			if (i == 3)
+				little_sort_reverse(stack_b);
+		}
+		else
+		{
+			//printf("B: ");
+			//printLinkedList(*stack_b);
+			//printf("==========PUSH_STACK_B==========\n");
+			//printf("PUSH value %d\n", (*stack_a)->value);
+			rotate_count = push_stack_b(stack_a, stack_b, rotate_count);
+			if (rotate_count != 0)
+			{
+				if (rotate_count < 0)
+					rotate(stack_b, "b", ft_abs(rotate_count));
+				else
+					reverse_rotate(stack_b, "b", ft_abs(rotate_count));
+			}
+		}
 	}
 }
 
@@ -133,8 +155,8 @@ void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 		}
 		find_range_numbers(stack_a, stack_b, minRangeValue, maxRangeValue);
 		i++;
-		if (i > 1)
-			return;
+		//if (i > 1)
+		//	return;
 	}
 	while (*stack_b)
 		push(stack_b, stack_a, "a", 1);

@@ -199,35 +199,42 @@ int	push_smaller_value(t_stack **stack_a, t_stack **stack_b, int roll_count, int
 	}
 }
 
-void	push_stack_b(t_stack **stack_a, t_stack **stack_b)
+int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count)
 {
 	int put_ind;
 	int	number;
 
 	number = (*stack_a)->value;
 	put_ind = find_put_ind(*stack_b, number, 0);
+	//printf("PUT_IND: %d\n", put_ind);
+	/*
 	if (!(*stack_b))
 	{
 		push(stack_a, stack_b, "b", 1);
-		return;
-	}
+		return (0);
+	}*/
 	if (put_ind == 0)
 	{
 		if (number < (*stack_b)->value)
 		{
 			rotate(stack_b, "b", 1);
 			push(stack_a, stack_b, "b", 1);
-			reverse_rotate(stack_b, "b", 1);
+			//reverse_rotate(stack_b, "b", 1);
+			rotate_count = 1;
 		}
 		else 		// если number - самое большое
+		{
 			push(stack_a, stack_b, "b", 1);
+			rotate_count = 0;
+		}
 	}
 	else
 	{
 		if (put_ind == -1)
 		{
 			push(stack_a, stack_b, "b", 1);
-			rotate(stack_b, "b", 1);
+			//rotate(stack_b, "b", 1);
+			rotate_count = -1;
 		}
 		else {
 			if (put_ind < 0)
@@ -236,9 +243,16 @@ void	push_stack_b(t_stack **stack_a, t_stack **stack_b)
 				rotate(stack_b, "b", put_ind + 1);
 			push(stack_a, stack_b, "b", 1);
 			if (put_ind < 0)
-				rotate(stack_b, "b", abs(put_ind));
+			{
+				//rotate(stack_b, "b", abs(put_ind));
+				rotate_count = put_ind;
+			}
 			else
-				reverse_rotate(stack_b, "b", abs(put_ind) + 1);
+			{
+				//reverse_rotate(stack_b, "b", abs(put_ind) + 1);
+				rotate_count = put_ind + 1;
+			}
 		}
 	}
+	return (rotate_count);
 }

@@ -4,7 +4,7 @@
  * Функция производит поиск числа сверху списка, диапазон
  * значений которого задан переменными от min_val до max_val.
  *
- * @param stack:	Стэк в котором происходит поис.
+ * @param stack:	Стэк в котором происходит поиск.
  * @param min_val:	минимальное значения диапазона.
  * @param max_val:	максимальное значение диапазона.
  *
@@ -56,7 +56,11 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 	i = 0;
 	rotate_count = 0;
 	range_size = (*stack_a)->range_size;
-	//range_size = 5;
+	//printf("=======================START OF NEW RANGE====================\n");
+	//printLinkedList(*stack_b);
+	//printf("MINRANGE: %d\n", minRangeValue);
+	//if (minRangeValue > 19)
+	//	range_size = 2;
 	while (i++ < range_size && *stack_a)
 	{
 		int frontInd = find_first_val_front(*stack_a, minRangeValue, maxRangeValue);
@@ -95,20 +99,26 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 		}
 		else
 		{
-			//printf("B: ");
-			//printLinkedList(*stack_b);
-			//printf("==========PUSH_STACK_B==========\n");
-			//printf("PUSH value %d\n", (*stack_a)->value);
-			rotate_count = push_stack_b(stack_a, stack_b, rotate_count);
-			if (rotate_count != 0)
-			{
-				if (rotate_count < 0)
-					rotate(stack_b, "b", ft_abs(rotate_count));
-				else
-					reverse_rotate(stack_b, "b", ft_abs(rotate_count));
-			}
+			if (i + 1 >= range_size)
+				rotate_count = push_from_a_to_b(stack_a, stack_b, rotate_count, 1);
+			else
+				rotate_count = push_from_a_to_b(stack_a, stack_b, rotate_count, 0);
+			//printf("ROLL_COUNT: %d\n", rotate_count);
 		}
 	}
+	/*
+	printf("ОТМОТКА!!!\n");
+	printf("На %d ЗНАЧЕНИЙ\n", rotate_count);
+	printLinkedList(*stack_b);
+	 */
+	if (rotate_count != 0)
+	{
+		if (rotate_count < 0)
+			rotate(stack_b, "b", ft_abs(rotate_count));
+		else
+			reverse_rotate(stack_b, "b", ft_abs(rotate_count));
+	}
+	rotate_count = 0;
 }
 
 void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
@@ -138,7 +148,7 @@ void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 		size_of_range = (max - min + 1) / number_of_ranges;
 	}
 	i = 1;
-	while ((*stack_a))
+	while (*stack_a)
 	{
 		(*stack_a)->range_size = size_of_range;
 		if (len <= 20)
@@ -155,7 +165,7 @@ void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 		}
 		find_range_numbers(stack_a, stack_b, minRangeValue, maxRangeValue);
 		i++;
-		//if (i > 1)
+		//if (i > 4)
 		//	return;
 	}
 	while (*stack_b)

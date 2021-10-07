@@ -56,7 +56,7 @@ void	reverse_rotate(t_stack **stack, char *name, int count);
 void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b, int count);
 
 
-int		push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count);
+int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, int rotate_count_b);
 int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count, int range_size);
 
 

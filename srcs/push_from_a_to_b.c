@@ -47,9 +47,11 @@ int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, i
 		printf("Откручиваем значения: \n");
 		printLinkedList(*stack_b);
 		 */
-		// Возвращение чисел в стеке на прежние места если взятое число встает "не в свое место"
+		// Возвращение чисел в стеке на прежние места, если взятое число встает "не в свое место"
 		//if (rotate_count != 0)
-		scroll_stacks(stack_a, stack_b, rotate_count_a, rotate_count_b);
+		scroll_to_past(stack_b, "b", rotate_count_b);
+
+		//scroll_stacks(stack_a, stack_b, rotate_count_a, rotate_count_b);
 
 /*
 		if (rotate_count != 0)
@@ -62,7 +64,7 @@ int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, i
 */
 		//printf("Результат для push_stack_b: \n");
 		//printLinkedList(*stack_b);
-		rotate_count_b = push_stack_b(stack_a, stack_b, rotate_count_b);
+		rotate_count_b = push_stack_b(stack_a, stack_b, rotate_count_a, rotate_count_b);
 	}
 	return (rotate_count_b);
 }

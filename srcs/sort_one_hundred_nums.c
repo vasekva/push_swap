@@ -61,8 +61,9 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 	//printf("=======================START OF NEW RANGE====================\n");
 	//printLinkedList(*stack_b);
 	//printf("MINRANGE: %d\n", minRangeValue);
-	//if (minRangeValue > 19)
+	//if (minRangeValue >= 0)
 	//	range_size = 2;
+	//range_size = 7;
 	while (i++ < range_size && *stack_a)
 	{
 		int frontInd = find_first_val_front(*stack_a, minRangeValue, maxRangeValue);
@@ -107,15 +108,6 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 	 */
 	// Возвращение чисел в стеке на прежние места после окончания сортировки промежутка значений
 	scroll_to_past(stack_b, "b", rotate_count_b);
-/*
-	if (rotate_count_b != 0)
-	{
-		if (rotate_count_b < 0)
-			rotate(stack_b, "b", ft_abs(rotate_count_b));
-		else
-			reverse_rotate(stack_b, "b", ft_abs(rotate_count_b));
-	}
-*/
 	rotate_count_b = 0;
 }
 
@@ -163,7 +155,7 @@ void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 		}
 		find_range_numbers(stack_a, stack_b, minRangeValue, maxRangeValue);
 		i++;
-		//if (i > 2)
+		//if (i > 1)
 		//	return;
 	}
 	while (*stack_b)

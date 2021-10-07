@@ -73,7 +73,6 @@ void	scroll_stacks(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, int
 			--rotate_count_b;
 		}
 	}
-
 	scroll_to_past(stack_a, "a", rotate_count_a);
 	scroll_to_past(stack_b, "b", rotate_count_b);
 }

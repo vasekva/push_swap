@@ -6,7 +6,6 @@ int	is_int_num(char *str)
 	long long	number;
 
 	i = -1;
-	// проверка на то, что строка - число
 	while (str[++i])
 	{
 		if (i == 0 && str[i] == '-'
@@ -106,6 +105,7 @@ void	fill_list(char **argv, t_stack **stack)
 			{
 				pushBack(stack, ft_atoi(arr[j]));
 			}
+			arr_free(arr);
 		}
 		else
 			pushBack(stack, ft_atoi(argv[i]));
@@ -254,7 +254,3 @@ int main(int argc, char **argv)
 	return (0);
 }
 //TODO: после написания программы проверить, используется ли флаг 1 в функции find_put_ind();
-/*
- *  ARG="78 69 10 23 9 65 55 43 26 34 46 53 70 81 88 94 51 99 87 21 17 42 14 27 13 38 68 83 52 20 0 82 2 15 1 77 64 50 91 62 74 22 32 96 19 49 24 97 6 12 45 79 59 95 29 35 41 73 39 56 71 4 8 5 48 44 57 84 76 18 30 67 31 37 60 25 7 85 3 89 72 58 40 61 92 54 16 11 63 75 33 80 66 93 28 98 47 86 36 90"
-
- */

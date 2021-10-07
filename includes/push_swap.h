@@ -14,8 +14,6 @@
 typedef struct		s_list
 {
 	int				value;
-	int				max_value;
-	int				min_value;
 	int				range_size;
 	int             ind;
 	struct s_list	*next;

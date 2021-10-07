@@ -78,23 +78,25 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 		// в первой половине чисел, либо во второй половине нет нужного числа
 		if ((frontInd <= ft_abs(backInd) && frontInd >= 0) || backInd == 0)
 		{
-			rotate(stack_a, "a", ft_abs(frontInd));
-			//rotate_count_a = frontInd * (-1);
+			//rotate(stack_a, "a", ft_abs(frontInd));
+			rotate_count_a = frontInd * (-1);
 		}
 		else
 		{
-			reverse_rotate(stack_a, "a", ft_abs(backInd));
-			//rotate_count_a = ft_abs(backInd);
+			//reverse_rotate(stack_a, "a", ft_abs(backInd));
+			rotate_count_a = backInd;
 		}
 		if (i <= 3 && listLength(*stack_b) <= 3)
 		{
+			scroll_to_past(stack_a, "a", rotate_count_a);
+			//rotate_count_a = 0;
 			push(stack_a, stack_b, "b", 1);
 			if (i == 3)
 				little_sort_reverse(stack_b);
 		}
 		else
 		{
-			rotate_count_b = push_from_a_to_b(stack_a, stack_b, rotate_count_b, 0);
+			rotate_count_b = push_from_a_to_b(stack_a, stack_b, rotate_count_a, rotate_count_b);
 			//printf("ROLL_COUNT: %d\n", rotate_count);
 		}
 	}
@@ -104,6 +106,8 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 	printLinkedList(*stack_b);
 	 */
 	// Возвращение чисел в стеке на прежние места после окончания сортировки промежутка значений
+	scroll_to_past(stack_b, "b", rotate_count_b);
+/*
 	if (rotate_count_b != 0)
 	{
 		if (rotate_count_b < 0)
@@ -111,6 +115,7 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 		else
 			reverse_rotate(stack_b, "b", ft_abs(rotate_count_b));
 	}
+*/
 	rotate_count_b = 0;
 }
 
@@ -158,7 +163,7 @@ void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 		}
 		find_range_numbers(stack_a, stack_b, minRangeValue, maxRangeValue);
 		i++;
-		//if (i > 4)
+		//if (i > 2)
 		//	return;
 	}
 	while (*stack_b)

@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count, int scroll_flag)
+int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, int rotate_count_b)
 {
 	t_stack *tmp;
 	int	flag;
@@ -31,12 +31,13 @@ int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count, int
 	}
 	if (flag != 0)
 	{
+		scroll_to_past(stack_a, "a", rotate_count_a);
 		//printf("Возможное дополнение чисел!\n");
 		push(stack_a, stack_b, "b", 1);
-		if (rotate_count != 0)
+		if (rotate_count_b != 0)
 		{
-			if (rotate_count < 0)
-				--rotate_count;
+			if (rotate_count_b < 0)
+				--rotate_count_b;
 		}
 	}
 	else
@@ -47,6 +48,10 @@ int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count, int
 		printLinkedList(*stack_b);
 		 */
 		// Возвращение чисел в стеке на прежние места если взятое число встает "не в свое место"
+		//if (rotate_count != 0)
+		scroll_stacks(stack_a, stack_b, rotate_count_a, rotate_count_b);
+
+/*
 		if (rotate_count != 0)
 		{
 			if (rotate_count < 0)
@@ -54,9 +59,10 @@ int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count, int
 			else
 				reverse_rotate(stack_b, "b", ft_abs(rotate_count));
 		}
+*/
 		//printf("Результат для push_stack_b: \n");
 		//printLinkedList(*stack_b);
-		rotate_count = push_stack_b(stack_a, stack_b, rotate_count);
+		rotate_count_b = push_stack_b(stack_a, stack_b, rotate_count_b);
 	}
-	return (rotate_count);
+	return (rotate_count_b);
 }

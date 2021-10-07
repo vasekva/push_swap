@@ -66,6 +66,8 @@ int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count, int
 int	ft_abs(int number);
 void	print_action_message(char *stack_name, char *action);
 void	arr_free(char **array);
+void	scroll_to_past(t_stack **stack, char *stack_name, int rotate_count);
+void	scroll_stacks(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, int rotate_count_b);
 
 //33 12 3 -100 -150
 #endif

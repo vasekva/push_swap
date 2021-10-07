@@ -58,7 +58,7 @@ int	define_index(t_stack *stack, int value)
 	return (0);
 }
 */
-int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count)
+int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count_b)
 {
 	int put_ind;
 	int	number;
@@ -71,12 +71,12 @@ int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count)
 		{
 			rotate(stack_b, "b", 1);
 			push(stack_a, stack_b, "b", 1);
-			rotate_count = 1;
+			rotate_count_b = 1;
 		}
 		else 		// если number - самое большое
 		{
 			push(stack_a, stack_b, "b", 1);
-			rotate_count = 0;
+			rotate_count_b = 0;
 		}
 	}
 	else
@@ -84,7 +84,7 @@ int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count)
 		if (put_ind == -1)
 		{
 			push(stack_a, stack_b, "b", 1);
-			rotate_count = -1;
+			rotate_count_b = -1;
 		}
 		else {
 			if (put_ind < 0)
@@ -94,13 +94,13 @@ int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count)
 			push(stack_a, stack_b, "b", 1);
 			if (put_ind < 0)
 			{
-				rotate_count = put_ind;
+				rotate_count_b = put_ind;
 			}
 			else
 			{
-				rotate_count = put_ind + 1;
+				rotate_count_b = put_ind + 1;
 			}
 		}
 	}
-	return (rotate_count);
+	return (rotate_count_b);
 }

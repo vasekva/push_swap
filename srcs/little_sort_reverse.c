@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   little_sort_reverse.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jberegon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/08 01:18:30 by jberegon          #+#    #+#             */
+/*   Updated: 2021/10/08 01:18:31 by jberegon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static int find_ind_min(t_stack *stack)
+static int	find_ind_min(t_stack *stack)
 {
 	int		ind_min;
 	int		min_val;
@@ -42,13 +54,14 @@ static int	find_ind_max(t_stack *stack)
 	return (ind_max);
 }
 
-static void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *stack_name)
+static void	sort_three_values(int ind_min, int ind_max,
+							  t_stack **stack, char *stack_name)
 {
 	if (ind_min == 0)
 	{
-		if (ind_max == 1) // 132
+		if (ind_max == 1)
 			rotate(stack, stack_name, 1);
-		else // 123
+		else
 		{
 			rotate(stack, stack_name, 1);
 			swap(stack, stack_name, 1);
@@ -56,14 +69,14 @@ static void	sort_three_values(int ind_min, int ind_max, t_stack **stack, char *s
 	}
 	else if (ind_max != 0)
 	{
-		if (ind_min == 1) // 213
+		if (ind_min == 1)
 			reverse_rotate(stack, stack_name, 1);
-		else // 231
+		else
 			swap(stack, stack_name, 1);
 	}
 	else
 	{
-		if (ind_min == 1) //312
+		if (ind_min == 1)
 		{
 			swap(stack, stack_name, 1);
 			rotate(stack, stack_name, 1);
@@ -78,7 +91,7 @@ void	little_sort_reverse(t_stack **stack)
 
 	ind_max = find_ind_max(*stack);
 	ind_min = find_ind_min(*stack);
-	if (listLength(*stack) == 2 && ind_max == 1)
+	if (list_length(*stack) == 2 && ind_max == 1)
 	{
 		swap(stack, "b", 1);
 		return ;

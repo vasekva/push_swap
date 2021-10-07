@@ -7,15 +7,13 @@
  */
 void	printLinkedList(const t_stack *stack)
 {
-    while (stack)
-    {
-        if (stack->next != NULL)
-			//printf("%d ", stack->value);
+	while (stack)
+	{
+		if (stack->next != NULL)
 			printf("%d[%d] ", stack->value, stack->ind);
-        else
-			//printf("%d", stack->value);
-            printf("%d [%d]", stack->value, stack->ind);
-        stack = stack->next;
-    }
-    printf("\n");
+		else
+			printf("%d [%d]", stack->value, stack->ind);
+		stack = stack->next;
+	}
+	printf("\n");
 }

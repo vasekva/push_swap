@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_stack_b.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jberegon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/08 01:17:57 by jberegon          #+#    #+#             */
+/*   Updated: 2021/10/08 01:17:59 by jberegon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /*
@@ -58,9 +70,38 @@ int	define_index(t_stack *stack, int value)
 	return (0);
 }
 */
-int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, int rotate_count_b)
+
+static int	push_to_b(t_stack **stack_a, t_stack **stack_b,
+					int rotate_count_a, int put_ind)
 {
-	int put_ind;
+	int	rotate_count_b;
+
+	if (put_ind == -1)
+	{
+		scroll_to_past(stack_a, "a", rotate_count_a);
+		push(stack_a, stack_b, "b", 1);
+		rotate_count_b = -1;
+	}
+	else
+	{
+		if (put_ind < 0)
+			scroll_stacks(stack_a, stack_b,
+				rotate_count_a, abs(put_ind) - 1);
+		else
+			scroll_stacks(stack_a, stack_b,
+				rotate_count_a, (put_ind + 1) * (-1));
+		push(stack_a, stack_b, "b", 1);
+		rotate_count_b = put_ind;
+		if (put_ind > 0)
+			++rotate_count_b;
+	}
+	return (rotate_count_b);
+}
+
+int	push_stack_b(t_stack **stack_a, t_stack **stack_b,
+				 int rotate_count_a, int rotate_count_b)
+{
+	int	put_ind;
 	int	number;
 
 	number = get_nth(*stack_a, ft_abs(rotate_count_a))->value;
@@ -73,7 +114,7 @@ int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, int r
 			push(stack_a, stack_b, "b", 1);
 			rotate_count_b = 1;
 		}
-		else 		// если number - самое большое
+		else
 		{
 			scroll_to_past(stack_a, "a", rotate_count_a);
 			push(stack_a, stack_b, "b", 1);
@@ -82,31 +123,7 @@ int	push_stack_b(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, int r
 	}
 	else
 	{
-		if (put_ind == -1)
-		{
-			scroll_to_past(stack_a, "a", rotate_count_a);
-			push(stack_a, stack_b, "b", 1);
-			rotate_count_b = -1;
-		}
-		else {
-			if (put_ind < 0)
-			{
-				scroll_stacks(stack_a, stack_b, rotate_count_a, abs(put_ind) - 1);
-			}
-			else
-			{
-				scroll_stacks(stack_a, stack_b, rotate_count_a, (put_ind + 1) * (-1));
-			}
-			push(stack_a, stack_b, "b", 1);
-			if (put_ind < 0)
-			{
-				rotate_count_b = put_ind;
-			}
-			else
-			{
-				rotate_count_b = put_ind + 1;
-			}
-		}
+		rotate_count_b = push_to_b(stack_a, stack_b, rotate_count_a, put_ind);
 	}
 	return (rotate_count_b);
 }

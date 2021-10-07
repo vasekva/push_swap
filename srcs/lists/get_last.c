@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_past_pointers.c                                :+:      :+:    :+:   */
+/*   get_last.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberegon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 21:41:05 by jberegon          #+#    #+#             */
-/*   Updated: 2021/10/07 21:41:06 by jberegon         ###   ########.fr       */
+/*   Created: 2021/10/07 21:40:31 by jberegon          #+#    #+#             */
+/*   Updated: 2021/10/07 21:40:32 by jberegon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	put_past_pointers(t_stack *stack)
+/**
+ * Функция возвращает указатель на
+ * последний элемент списка.
+ *
+ * @return
+ * Возвращает указатель на последний
+ * элемент списка.\n
+ * Если список равен NULL - возвращается NULL.
+ */
+t_stack	*get_last(t_stack *stack)
 {
 	if (!stack)
-		return ;
-	stack->past = NULL;
+		return (NULL);
 	while (stack->next)
-	{
-		if (stack->next != NULL)
-			stack->next->past = stack;
 		stack = stack->next;
-	}
+	return (stack);
 }

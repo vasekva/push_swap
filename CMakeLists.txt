@@ -18,11 +18,11 @@ add_executable(push_swap
         libft/srcs/second_part/ft_strjoin.c
         libft/srcs/second_part/ft_substr.c
 
-        srcs/lists/getLast.c
+        srcs/lists/get_last.c
         srcs/lists/get_nth.c
-        srcs/lists/listLength.c
+        srcs/lists/list_length.c
         srcs/lists/printLinkedList.c
-        srcs/lists/pushBack.c
+        srcs/lists/push_back.c
         srcs/lists/find_max_value.c
         srcs/lists/find_min_value.c
         srcs/lists/put_past_pointers.c
@@ -35,7 +35,7 @@ add_executable(push_swap
         srcs/main.c
         srcs/push_stack_b.c
         srcs/sort_five_and_four_nums.c
-        srcs/sort_one_hundred_nums.c
+        srcs/big_sort.c
         srcs/utils.c
 
         )

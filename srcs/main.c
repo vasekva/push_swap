@@ -1,116 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jberegon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/08 01:18:20 by jberegon          #+#    #+#             */
+/*   Updated: 2021/10/08 01:18:21 by jberegon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	is_int_num(char *str)
-{
-	int	i;
-	long long	number;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (i == 0 && str[i] == '-'
-			&& ft_isdigit(str[i + 1]))
-			continue ;
-		if (!ft_isdigit(str[i]))
-		{
-			exception(NOTDIGIT);
-		}
-	}
-	number = ft_atoi(str);
-	if (number > 2147483647 || number < -2147483648)
-		exception(OVERFLOW);
-	return ((int)number);
-}
-
-int	has_spaces(const char *str)
-{
-	int i;
-
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == ' ')
-			return (1);
-	}
-	return (0);
-}
-
-int	parse_parameters(char **argv)
-{
-	int		i;
-	int		j;
-	char	**array;
-
-	i = 0;
-	j = -1;
-	array = NULL;
-	// проверка валидности чисел в массиве
-	while (argv[++i])
-	{
-		if (has_spaces(argv[i]))
-		{
-			array = ft_split(argv[i], ' ');
-			while (array[++j])
-			{
-				is_int_num(array[j]);
-			}
-			arr_free(array);
-		}
-		else
-			is_int_num(argv[i]);
-	}
-	return (0);
-}
-
-void	checkLinkedList(const t_stack *stack)
-{
-	const t_stack	*p;
-	const t_stack	*p_iter;
-
-	p = stack;
-	p_iter = stack;
-	while (stack)
-	{
-		while (p_iter)
-		{
-			if (stack == p_iter)
-				p_iter = p_iter->next;
-			else
-			{
-				if (stack->value == p_iter->value)
-					exception(REPEATING);
-				p_iter = p_iter->next;
-			}
-		}
-		p_iter = p; // обнуление указателя
-		stack = stack->next;
-	}
-}
-
-void	fill_list(char **argv, t_stack **stack)
-{
-	char **arr;
-	int	i;
-	int j;
-
-	i = 0;
-	arr = NULL;
-	while (argv[++i])
-	{
-		j = -1;
-		if (has_spaces(argv[i]))
-		{
-			arr = ft_split(argv[i], ' ');
-			while (arr[++j])
-			{
-				pushBack(stack, ft_atoi(arr[j]));
-			}
-			arr_free(arr);
-		}
-		else
-			pushBack(stack, ft_atoi(argv[i]));
-	}
-}
 /*
 void do_actions(t_stack *a, t_stack *b)
 {
@@ -170,32 +71,32 @@ void do_actions(t_stack *a, t_stack *b)
 	}
 }
 */
-void    put_indexes(t_stack *stack)
+void	put_indexes(t_stack *stack)
 {
-    int mid_pos;
-    int len;
-    int ind;
-    int i;
+	int	mid_pos;
+	int	len;
+	int	ind;
+	int	i;
 
-    i = 0;
-    ind = 0;
-    len = listLength(stack);
-    mid_pos = (len / 2);
-    if (len % 2 != 0)
-        ++mid_pos;
-    while (stack)
-    {
-        if (i < mid_pos)
-            stack->ind = (ind++);
-        else
-        {
-            if (!(len % 2 == 0 && i == mid_pos))
-                ind--;
-            stack->ind = (ind) * -1;
-        }
-        i++;
-        stack = stack->next;
-    }
+	i = 0;
+	ind = 0;
+	len = list_length(stack);
+	mid_pos = (len / 2);
+	if (len % 2 != 0)
+		++mid_pos;
+	while (stack)
+	{
+		if (i < mid_pos)
+			stack->ind = (ind++);
+		else
+		{
+			if (!(len % 2 == 0 && i == mid_pos))
+				ind--;
+			stack->ind = (ind) * -1;
+		}
+		i++;
+		stack = stack->next;
+	}
 }
 
 int	is_sorted(t_stack *stack)
@@ -209,48 +110,44 @@ int	is_sorted(t_stack *stack)
 	return (1);
 }
 
-//TODO: посмотреть работу strjoin с неаллоцированными строками
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_stack *stack_a;
+	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int		list_length;
+	int		length;
 
-    stack_a = NULL;
-    stack_b = NULL;
+	stack_a = NULL;
+	stack_b = NULL;
 	if (argc >= 2)
 	{
 		parse_parameters(argv);
 		fill_list(argv, &stack_a);
 		if (is_sorted(stack_a) == 1)
 			return (0);
-		list_length = listLength(stack_a);
+		length = list_length(stack_a);
 		put_indexes(stack_a);
 		checkLinkedList(stack_a);
-		if (list_length <= 3)
-        {
-		    little_sort(&stack_a);
-        }
-		else if (list_length <= 5)
-		{
+		if (length <= 3)
+			little_sort(&stack_a);
+		else if (length <= 5)
 			sort_five_and_four_nums(&stack_a, &stack_b);
-		}
 		else
-		{
-			sort_one_hundred_nums(&stack_a, &stack_b);
-		}
-
-		/*
-		printf("REZ: \n");
-
-		printf("A:\n");
-		printLinkedList(stack_a);
-		printf("B:\n");
-		printLinkedList(stack_b);
-		//*/
+			big_sort(&stack_a, &stack_b);
 	}
 	else
 		exception(FEWPARAMS);
 	return (0);
 }
-//TODO: после написания программы проверить, используется ли флаг 1 в функции find_put_ind();
+
+//TODO: после написания программы проверить, используется ли флаг
+// 1 в функции find_put_ind();
+//TODO: удалить printLinkedList и удалить библиотеку для printf
+//TODO: посмотреть работу strjoin с неаллоцированными строками
+// (нужно ли free(tmp))
+/*
+printf("REZ: \n");
+printf("A:\n");
+printLinkedList(stack_a);
+printf("B:\n");
+printLinkedList(stack_b);
+//*/

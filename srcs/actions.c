@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jberegon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/08 01:19:37 by jberegon          #+#    #+#             */
+/*   Updated: 2021/10/08 01:19:38 by jberegon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b, int count)
+void	execute_two_cmds(char *cmd, t_stack **a, t_stack **b, int count)
 {
 	while (count--)
 	{
@@ -9,37 +21,32 @@ void    execute_two_cmds(char *cmd, t_stack **a, t_stack **b, int count)
 			swap(a, NULL, 1);
 			swap(b, NULL, 1);
 			write(1, "ss\n", 3);
-			//print_action_message(NULL, "ss");
 		}
 		else if (!ft_strncmp("rr", cmd, ft_strlen(cmd)))
 		{
 			rotate(a, NULL, 1);
 			rotate(b, NULL, 1);
 			write(1, "rr\n", 3);
-			//print_action_message(NULL, "rr");
 		}
 		else if (!ft_strncmp("rrr", cmd, ft_strlen(cmd)))
 		{
 			reverse_rotate(a, NULL, 1);
 			reverse_rotate(b, NULL, 1);
 			write(1, "rrr\n", 4);
-			//print_action_message(NULL, "rrr");
 		}
 	}
 }
 
 void	push(t_stack **src, t_stack **dst, char *name, int count)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	while (count--)
 	{
 		if (!(*src))
 			return ;
 		tmp = (*src)->next;
-		//tmp->past = NULL;
 		(*src)->next = *dst;
-		//(*dst)->past = (*src);
 		*dst = (*src);
 		*src = tmp;
 		put_indexes(*src);
@@ -53,12 +60,12 @@ void	push(t_stack **src, t_stack **dst, char *name, int count)
 
 void	swap(t_stack **stack, char *name, int count)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	while (count--)
 	{
 		if (!(*stack) || !(*stack)->next)
-			return;
+			return ;
 		tmp = (*stack)->next;
 		(*stack)->next = tmp->next;
 		tmp->next = (*stack);
@@ -72,12 +79,12 @@ void	swap(t_stack **stack, char *name, int count)
 
 void	rotate(t_stack **stack, char *name, int count)
 {
-	t_stack *tmp;
+	t_stack	*tmp;
 
 	while (count--)
 	{
 		if (!(*stack) || !(*stack)->next)
-			return;
+			return ;
 		tmp = (*stack);
 		while (tmp->next)
 			tmp = tmp->next;
@@ -91,15 +98,15 @@ void	rotate(t_stack **stack, char *name, int count)
 	}
 }
 
-void reverse_rotate(t_stack **stack, char *name, int count)
+void	reverse_rotate(t_stack **stack, char *name, int count)
 {
-	t_stack *pre_last;
-	t_stack *last;
+	t_stack	*pre_last;
+	t_stack	*last;
 
 	while (count--)
 	{
 		if (!(*stack) || !(*stack)->next)
-			return;
+			return ;
 		pre_last = (*stack);
 		while (pre_last->next->next)
 			pre_last = pre_last->next;

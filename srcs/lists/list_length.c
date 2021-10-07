@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_past_pointers.c                                :+:      :+:    :+:   */
+/*   list_length.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberegon <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/07 21:41:05 by jberegon          #+#    #+#             */
-/*   Updated: 2021/10/07 21:41:06 by jberegon         ###   ########.fr       */
+/*   Created: 2021/10/07 21:40:48 by jberegon          #+#    #+#             */
+/*   Updated: 2021/10/07 21:40:49 by jberegon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	put_past_pointers(t_stack *stack)
+/**
+ * Функция возвращает
+ * длину полученного списка.
+ */
+int	list_length(const t_stack *stack)
 {
-	if (!stack)
-		return ;
-	stack->past = NULL;
-	while (stack->next)
+	int	length;
+
+	length = 0;
+	while (stack)
 	{
-		if (stack->next != NULL)
-			stack->next->past = stack;
 		stack = stack->next;
+		length++;
 	}
+	return (length);
 }

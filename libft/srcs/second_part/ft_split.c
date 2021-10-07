@@ -14,8 +14,8 @@
 
 static	size_t	ft_count_words(char const *str, char c)
 {
-	size_t i;
-	size_t words;
+	size_t	i;
+	size_t	words;
 
 	i = 0;
 	words = 0;
@@ -32,7 +32,7 @@ static	size_t	ft_count_words(char const *str, char c)
 	return (words);
 }
 
-static void		ft_free_words(char **matrix, size_t num)
+static void	ft_free_words(char **matrix, size_t num)
 {
 	if (num == 0)
 		free(matrix);
@@ -59,7 +59,7 @@ static	void	ft_do_words(const char *str, char c, int i, char **matrix)
 	{
 		while (str[i] && str[i] == c)
 			i++;
-		if (i == 0 || ((str[i] != c) && (str[i - 1] == c || str[i - 1] == '\0')))
+		if (i == 0 || (str[i] != c && (str[i - 1] == c || str[i - 1] == '\0')))
 			start = i;
 		if (str[i + 1] == c || str[i + 1] == '\0')
 		{
@@ -76,7 +76,7 @@ static	void	ft_do_words(const char *str, char c, int i, char **matrix)
 	matrix[arr_ind] = NULL;
 }
 
-char			**ft_split(char const *str, char symbol)
+char	**ft_split(char const *str, char symbol)
 {
 	char	**matrix_for_strings;
 	int		num_words;

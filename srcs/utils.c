@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jberegon <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/08 01:17:34 by jberegon          #+#    #+#             */
+/*   Updated: 2021/10/08 01:17:36 by jberegon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /**
@@ -52,9 +64,9 @@ void	scroll_to_past(t_stack **stack, char *stack_name, int rotate_count)
 	}
 }
 
-void	scroll_stacks(t_stack **stack_a, t_stack **stack_b, int rotate_count_a, int rotate_count_b)
+void	scroll_stacks(t_stack **stack_a, t_stack **stack_b,
+				   int rotate_count_a, int rotate_count_b)
 {
-
 	if (rotate_count_a < 0 && rotate_count_b < 0)
 	{
 		while (rotate_count_a && rotate_count_b)

@@ -99,10 +99,7 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 		}
 		else
 		{
-			if (i + 1 >= range_size)
-				rotate_count = push_from_a_to_b(stack_a, stack_b, rotate_count, 1);
-			else
-				rotate_count = push_from_a_to_b(stack_a, stack_b, rotate_count, 0);
+			rotate_count = push_from_a_to_b(stack_a, stack_b, rotate_count, 0);
 			//printf("ROLL_COUNT: %d\n", rotate_count);
 		}
 	}

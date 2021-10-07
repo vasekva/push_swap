@@ -46,6 +46,7 @@ int	push_from_a_to_b(t_stack **stack_a, t_stack **stack_b, int rotate_count, int
 		printf("Откручиваем значения: \n");
 		printLinkedList(*stack_b);
 		 */
+		// Возвращение чисел в стеке на прежние места если взятое число встает "не в свое место"
 		if (rotate_count != 0)
 		{
 			if (rotate_count < 0)

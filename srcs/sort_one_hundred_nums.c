@@ -51,10 +51,12 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 {
 	int i;
 	int range_size;
-	int	rotate_count;
+	int	rotate_count_b;
+	int	rotate_count_a;
 
 	i = 0;
-	rotate_count = 0;
+	rotate_count_b = 0;
+	rotate_count_a = 0;
 	range_size = (*stack_a)->range_size;
 	//printf("=======================START OF NEW RANGE====================\n");
 	//printLinkedList(*stack_b);
@@ -71,25 +73,18 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 		if (frontInd == 0 && backInd == 0 && ((*stack_a)->value < minRangeValue
 			|| (*stack_a)->value > maxRangeValue))
 			continue;
+
+		// если индекс левой(верхней половины) меньше либо равен модулю индекса снизу(справа) и он
+		// в первой половине чисел, либо во второй половине нет нужного числа
+		if ((frontInd <= ft_abs(backInd) && frontInd >= 0) || backInd == 0)
+		{
+			rotate(stack_a, "a", ft_abs(frontInd));
+			//rotate_count_a = frontInd * (-1);
+		}
 		else
 		{
-			// если число найдено только в одной половине стека
-			if (backInd == 0 || frontInd == 0)
-			{
-				if (backInd == 0)
-					rotate(stack_a, "a", frontInd);
-				else
-					reverse_rotate(stack_a, "a", ft_abs(backInd));
-			}
-			else
-			{
-				// если индекс сверху меньше либо равен модулю индекса снизу и он
-				// в первой половине чисел
-				if (frontInd <= ft_abs(backInd) && frontInd >= 0)
-					rotate(stack_a, "a", ft_abs(frontInd));
-				else
-					reverse_rotate(stack_a, "a", ft_abs(backInd));
-			}
+			reverse_rotate(stack_a, "a", ft_abs(backInd));
+			//rotate_count_a = ft_abs(backInd);
 		}
 		if (i <= 3 && listLength(*stack_b) <= 3)
 		{
@@ -99,7 +94,7 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 		}
 		else
 		{
-			rotate_count = push_from_a_to_b(stack_a, stack_b, rotate_count, 0);
+			rotate_count_b = push_from_a_to_b(stack_a, stack_b, rotate_count_b, 0);
 			//printf("ROLL_COUNT: %d\n", rotate_count);
 		}
 	}
@@ -108,14 +103,15 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 	printf("На %d ЗНАЧЕНИЙ\n", rotate_count);
 	printLinkedList(*stack_b);
 	 */
-	if (rotate_count != 0)
+	// Возвращение чисел в стеке на прежние места после окончания сортировки промежутка значений
+	if (rotate_count_b != 0)
 	{
-		if (rotate_count < 0)
-			rotate(stack_b, "b", ft_abs(rotate_count));
+		if (rotate_count_b < 0)
+			rotate(stack_b, "b", ft_abs(rotate_count_b));
 		else
-			reverse_rotate(stack_b, "b", ft_abs(rotate_count));
+			reverse_rotate(stack_b, "b", ft_abs(rotate_count_b));
 	}
-	rotate_count = 0;
+	rotate_count_b = 0;
 }
 
 void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)

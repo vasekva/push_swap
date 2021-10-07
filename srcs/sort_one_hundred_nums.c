@@ -113,6 +113,13 @@ static void	find_range_numbers(t_stack **stack_a, t_stack **stack_b, int minRang
 
 void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 {
+	int num_of_values;
+
+	if (listLength(*stack_a) <= 100 && listLength(*stack_a) > 20)
+		num_of_values = 9;
+	else
+		num_of_values = 20;
+
 	int	minRangeValue;
 	int	maxRangeValue;
 
@@ -125,33 +132,31 @@ void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 	int min = find_min_value(*stack_a);
 
 	len = listLength(*stack_a);
-	if (len <= 20)
+	if (len <= 10)
 	{
 		size_of_range = len;
 		number_of_ranges = 1;
 	}
 	else
 	{
-		number_of_ranges = len / 20;
-		if (len % 20 != 0)
+		number_of_ranges = len / num_of_values;
+		if (len % num_of_values != 0)
 			number_of_ranges++;
 		size_of_range = (max - min + 1) / number_of_ranges;
+		size_of_range += 7;
 	}
 	i = 1;
 	while (*stack_a)
 	{
 		(*stack_a)->range_size = size_of_range;
-		if (len <= 20)
+		if (listLength(*stack_a) <= 10)
 		{
 			minRangeValue = min;
 			maxRangeValue = max;
 		}
 		else {
 			minRangeValue = min + size_of_range * (i - 1);
-			if (len % 20 != 0 && i == number_of_ranges)
-				maxRangeValue = max;
-			else
-				maxRangeValue = minRangeValue + size_of_range - 1;
+			maxRangeValue = minRangeValue + size_of_range - 1;
 		}
 		find_range_numbers(stack_a, stack_b, minRangeValue, maxRangeValue);
 		i++;
@@ -160,5 +165,4 @@ void	sort_one_hundred_nums(t_stack **stack_a, t_stack **stack_b)
 	}
 	while (*stack_b)
 		push(stack_b, stack_a, "a", 1);
-
 }

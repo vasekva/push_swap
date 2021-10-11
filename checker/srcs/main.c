@@ -12,6 +12,60 @@
 
 #include "push_swap.h"
 
+
+void do_actions(t_stack *a, t_stack *b)
+{
+	char *action;
+
+	action = NULL;
+	while (1)
+	{
+		get_next_line(0, &action);
+		if (!ft_strncmp("pa", action, ft_strlen(action)))
+			push(&b, &a);
+		else if (!ft_strncmp("pb", action, ft_strlen(action)))
+			push(&a, &b);
+        else if (!ft_strncmp("sa", action, ft_strlen(action)))
+			swap(&a);
+        else if (!ft_strncmp("sb", action, ft_strlen(action)))
+		{
+			swap(&b);
+		}
+        else if (!ft_strncmp("ra", action, ft_strlen(action)))
+		{
+			rotate(&a);
+		}
+        else if (!ft_strncmp("rb", action, ft_strlen(action)))
+		{
+			rotate(&b);
+		}
+        else if (!ft_strncmp("rra", action, ft_strlen(action)))
+		{
+			reverse_rotate(&a);
+		}
+        else if (!ft_strncmp("rrb", action, ft_strlen(action)))
+		{
+			reverse_rotate(&b);
+		}
+		else if (!ft_strncmp(" ", " ", 1))
+		{
+			if (is_sorted(a))
+				write(1, "OK\n", 3);
+			else
+				write(1, "KO\n", 3);
+			free(action);
+			return ;
+		}
+        else
+            execute_two_cmds(action, &a, &b);
+		free(action);
+		printf("A: ");
+		printLinkedList(a);
+		printf("B: ");
+		printLinkedList(b);
+	}
+}
+
 void	put_indexes(t_stack *stack)
 {
 	int	mid_pos;
@@ -40,22 +94,10 @@ void	put_indexes(t_stack *stack)
 	}
 }
 
-int	is_sorted(t_stack *stack)
-{
-	while (stack->next)
-	{
-		if (stack->value > stack->next->value)
-			return (-1);
-		stack = stack->next;
-	}
-	return (1);
-}
-
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int		length;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -63,17 +105,10 @@ int	main(int argc, char **argv)
 	{
 		parse_parameters(argv);
 		fill_list(argv, &stack_a);
-		if (is_sorted(stack_a) == 1)
-			return (0);
-		length = list_length(stack_a);
 		put_indexes(stack_a);
 		checkLinkedList(stack_a);
-		if (length <= 3)
-			little_sort(&stack_a);
-		else if (length <= 5)
-			sort_five_and_four_nums(&stack_a, &stack_b);
-		else
-			big_sort(&stack_a, &stack_b);
+		printLinkedList(stack_a);
+		do_actions(stack_a, stack_b);
 	}
 	else
 		exception(FEWPARAMS);

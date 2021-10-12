@@ -23,57 +23,55 @@ static int	is_sorted(t_stack *stack)
 	return (1);
 }
 
-static void	start_program(int argc, char **argv)
+static void	start_program(int argc, char **argv,
+							 t_stack **stack_a, t_stack **stack_b)
 {
 	int		length;
-	t_stack	*stack_a;
-	t_stack	*stack_b;
 
-	stack_a = NULL;
-	stack_b = NULL;
 	while (argc--)
 	{
 		if (ft_strlen(argv[argc]) == 0)
 			exception("Error");
 	}
 	parse_parameters(argv);
-	fill_list(argv, &stack_a);
-	length = list_length(stack_a);
-	put_indexes(stack_a);
-	checkLinkedList(stack_a);
-	if (is_sorted(stack_a) == 1)
+	fill_list(argv, stack_a);
+	length = list_length(*stack_a);
+	if (length >= 550)
+		exception(TOOMANY);
+	put_indexes(*stack_a);
+	checkLinkedList(*stack_a);
+	if (is_sorted(*stack_a) == 1)
 		return ;
 	if (length <= 3)
-		little_sort(&stack_a);
+		little_sort(stack_a);
 	else if (length <= 5)
-		sort_five_and_four_nums(&stack_a, &stack_b);
+		sort_five_and_four_nums(stack_a, stack_b);
 	else
-		big_sort(&stack_a, &stack_b);
+		big_sort(stack_a, stack_b);
 }
 
 int	main(int argc, char **argv)
 {
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+
+	stack_a = NULL;
+	stack_b = NULL;
 	if (argc >= 2)
 	{
-		start_program(argc, argv);
+		start_program(argc, argv, &stack_a, &stack_b);
+		stack_a = get_last(stack_a);
+		while (stack_a->past)
+		{
+			stack_a = stack_a->past;
+			free(stack_a->next);
+		}
+		free(stack_a);
 	}
 	else
 		exception(FEWPARAMS);
 	return (0);
 }
-
-//TODO: после написания программы проверить, используется ли флаг
-// 1 в функции find_put_ind();
-//TODO: удалить printLinkedList и удалить библиотеку для printf
-//TODO: посмотреть работу strjoin с неаллоцированными строками
-// (нужно ли free(tmp))
-/*
-printf("REZ: \n");
-printf("A:\n");
-printLinkedList(stack_a);
-printf("B:\n");
-printLinkedList(stack_b);
-//*/
 
 /*
  * make re; ./push_swap $ARG | ./checker_Mac $ARG; ./push_swap $ARG | wc -l;

@@ -37,6 +37,8 @@ char	*ft_read_line(char *remainder, int fd, int c_w_r)
 	if (!remainder)
 	{
 		c_w_r = read(fd, buff, BUFFER_SIZE);
+		if (buff[0] == '\0')
+			return (ft_strdup("ZALUPA"));
 		if (c_w_r < 0)
 		{
 			free(buff);
@@ -48,6 +50,8 @@ char	*ft_read_line(char *remainder, int fd, int c_w_r)
 	while (!(ft_strchr(remainder, '\n')) && c_w_r)
 	{
 		c_w_r = read(fd, buff, BUFFER_SIZE);
+		if (buff[0] == '\0')
+			return (ft_strdup("ZALUPA"));
 		buff[c_w_r] = '\0';
 		remainder = ft_strjoin(remainder, buff);
 	}
@@ -64,6 +68,11 @@ int	get_next_line(int fd, char **line)
 	if (fd < 0 || BUFFER_SIZE < 1 || !line)
 		return (-1);
 	remainder = ft_read_line(remainder, fd, 1);
+	if (!ft_strncmp("ZALUPA", remainder, ft_strlen(remainder)))
+	{
+		free(remainder);
+		return (-333);
+	}
 	if (!remainder)
 		return (-1);
 	len = len_of_line(remainder);

@@ -10,9 +10,9 @@ void	printLinkedList(const t_stack *stack)
 	while (stack)
 	{
 		if (stack->next != NULL)
-			printf("%d[%d] ", stack->value, stack->ind);
+			printf("%d ", stack->value);
 		else
-			printf("%d [%d]", stack->value, stack->ind);
+			printf("%d", stack->value);
 		stack = stack->next;
 	}
 	printf("\n");

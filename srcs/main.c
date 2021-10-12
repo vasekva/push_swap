@@ -51,29 +51,39 @@ int	is_sorted(t_stack *stack)
 	return (1);
 }
 
-int	main(int argc, char **argv)
+void	start_program(int argc, char **argv)
 {
+	int		length;
 	t_stack	*stack_a;
 	t_stack	*stack_b;
-	int		length;
 
 	stack_a = NULL;
 	stack_b = NULL;
+	while (argc--)
+	{
+		if (ft_strlen(argv[argc]) == 0)
+			exception("Error");
+	}
+	parse_parameters(argv);
+	fill_list(argv, &stack_a);
+	length = list_length(stack_a);
+	put_indexes(stack_a);
+	checkLinkedList(stack_a);
+	if (is_sorted(stack_a) == 1)
+		return ;
+	if (length <= 3)
+		little_sort(&stack_a);
+	else if (length <= 5)
+		sort_five_and_four_nums(&stack_a, &stack_b);
+	else
+		big_sort(&stack_a, &stack_b);
+}
+
+int	main(int argc, char **argv)
+{
 	if (argc >= 2)
 	{
-		parse_parameters(argv);
-		fill_list(argv, &stack_a);
-		if (is_sorted(stack_a) == 1)
-			return (0);
-		length = list_length(stack_a);
-		put_indexes(stack_a);
-		checkLinkedList(stack_a);
-		if (length <= 3)
-			little_sort(&stack_a);
-		else if (length <= 5)
-			sort_five_and_four_nums(&stack_a, &stack_b);
-		else
-			big_sort(&stack_a, &stack_b);
+		start_program(argc, argv);
 	}
 	else
 		exception(FEWPARAMS);
@@ -92,3 +102,8 @@ printLinkedList(stack_a);
 printf("B:\n");
 printLinkedList(stack_b);
 //*/
+
+/*
+ * make re; ./push_swap $ARG | ./checker_Mac $ARG; ./push_swap $ARG | wc -l;
+ * ./push_swap $ARG | ./checker $ARG
+ */

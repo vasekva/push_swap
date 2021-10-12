@@ -12,25 +12,6 @@
 
 #include "push_swap.h"
 
-void	execute_two_cmds(char *cmd, t_stack **a, t_stack **b)
-{
-	if (!ft_strncmp("ss", cmd, ft_strlen(cmd)))
-	{
-		swap(a);
-		swap(b);
-	}
-	else if (!ft_strncmp("rr", cmd, ft_strlen(cmd)))
-	{
-		rotate(a);
-		rotate(b);
-	}
-	else if (!ft_strncmp("rrr", cmd, ft_strlen(cmd)))
-	{
-		reverse_rotate(a);
-		reverse_rotate(b);
-	}
-}
-
 void	push(t_stack **src, t_stack **dst)
 {
 	t_stack	*tmp;
@@ -41,9 +22,7 @@ void	push(t_stack **src, t_stack **dst)
 	(*src)->next = *dst;
 	*dst = (*src);
 	*src = tmp;
-	put_indexes(*src);
 	put_past_pointers(*src);
-	put_indexes(*dst);
 	put_past_pointers(*dst);
 }
 
@@ -57,7 +36,6 @@ void	swap(t_stack **stack)
 	(*stack)->next = tmp->next;
 	tmp->next = (*stack);
 	(*stack) = tmp;
-	put_indexes(*stack);
 	put_past_pointers(*stack);
 }
 
@@ -73,7 +51,6 @@ void	rotate(t_stack **stack)
 	tmp->next = (*stack);
 	(*stack) = (*stack)->next;
 	tmp->next->next = NULL;
-	put_indexes(*stack);
 	put_past_pointers(*stack);
 }
 
@@ -91,6 +68,5 @@ void	reverse_rotate(t_stack **stack)
 	pre_last->next = NULL;
 	last->next = (*stack);
 	(*stack) = last;
-	put_indexes(*stack);
 	put_past_pointers(*stack);
 }

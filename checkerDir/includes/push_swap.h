@@ -23,7 +23,7 @@ typedef struct		s_list
 	struct s_list	*past;
 }					t_stack;
 
-void	exception(char *str);
+void	exception();
 int		get_next_line(int fd, char **line);
 
 /*

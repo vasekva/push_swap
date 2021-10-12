@@ -37,7 +37,17 @@ static int	is_int_num(char *str)
 static int	has_spaces(const char *str)
 {
 	int	i;
+	int	flag;
 
+	i = -1;
+	flag = 0;
+	while (str[++i])
+	{
+		if (str[i] != ' ')
+			flag = 1;
+	}
+	if (!flag)
+		exception("Error");
 	i = -1;
 	while (str[++i])
 	{

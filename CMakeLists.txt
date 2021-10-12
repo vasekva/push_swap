@@ -21,7 +21,6 @@ add_executable(push_swap
         srcs/lists/get_last.c
         srcs/lists/get_nth.c
         srcs/lists/list_length.c
-        srcs/lists/printLinkedList.c
         srcs/lists/push_back.c
         srcs/lists/find_max_value.c
         srcs/lists/find_min_value.c
@@ -30,9 +29,12 @@ add_executable(push_swap
         srcs/actions.c
         srcs/exception.c
         srcs/get_next_line.c
+        srcs/insert_to_b.c
         srcs/little_sort.c
         srcs/little_sort_reverse.c
         srcs/main.c
+        srcs/parse_functions.c
+        srcs/push_from_a_to_b.c
         srcs/push_stack_b.c
         srcs/sort_five_and_four_nums.c
         srcs/big_sort.c

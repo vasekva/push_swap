@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXCEPTIONS_H
-# define EXCEPTIONS_H
+#ifndef EXCEPTION_H
+# define EXCEPTION_H
 
 # define FEWPARAMS	"You specified too few parameters!"
 # define NOTDIGIT	"You specified not digit argument!"
 # define OVERFLOW	"You specified invalid number!"
 # define REPEATING	"You specified repeating numbers!"
-# define EMPTYSTACK	"Stack is empty!"
 
 #endif

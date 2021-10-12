@@ -12,35 +12,7 @@
 
 #include "push_swap.h"
 
-void	put_indexes(t_stack *stack)
-{
-	int	mid_pos;
-	int	len;
-	int	ind;
-	int	i;
-
-	i = 0;
-	ind = 0;
-	len = list_length(stack);
-	mid_pos = (len / 2);
-	if (len % 2 != 0)
-		++mid_pos;
-	while (stack)
-	{
-		if (i < mid_pos)
-			stack->ind = (ind++);
-		else
-		{
-			if (!(len % 2 == 0 && i == mid_pos))
-				ind--;
-			stack->ind = (ind) * -1;
-		}
-		i++;
-		stack = stack->next;
-	}
-}
-
-int	is_sorted(t_stack *stack)
+static int	is_sorted(t_stack *stack)
 {
 	while (stack->next)
 	{
@@ -51,7 +23,7 @@ int	is_sorted(t_stack *stack)
 	return (1);
 }
 
-void	start_program(int argc, char **argv)
+static void	start_program(int argc, char **argv)
 {
 	int		length;
 	t_stack	*stack_a;

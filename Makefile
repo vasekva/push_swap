@@ -6,12 +6,12 @@ LIBRARY			=	./libft/libft.a
 SRCS_DIR		=	./srcs/
 OBJS_DIR		=	./objs/
 
-SRCS_NAME		=	actions.c exception.c get_next_line.c little_sort.c little_sort_reverse.c \
+SRCS_NAME		=	actions.c exception.c little_sort.c little_sort_reverse.c \
 					main.c push_stack_b.c sort_five_and_four_nums.c big_sort.c insert_to_b.c utils.c \
 					push_from_a_to_b.c parse_functions.c \
 
 LISTS_FUNCS		=	find_max_value.c find_min_value.c get_last.c list_length.c \
-                    push_back.c put_past_pointers.c get_nth.c \
+                    push_back.c put_past_pointers.c get_nth.c put_indexes.c find_put_ind.c \
 
 OBJS_NAME	=	$(SRCS_NAME:.c=.o) $(LISTS_FUNCS:.c=.o)
 
